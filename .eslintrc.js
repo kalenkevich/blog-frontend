@@ -15,6 +15,7 @@ module.exports = {
     'IS_SERVER': true,
   },
   rules: {
+    'no-use-before-define': 'off',
     'indent': ['error', 2, {
       SwitchCase: 1,
       VariableDeclarator: 1,

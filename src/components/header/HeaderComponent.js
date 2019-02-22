@@ -4,7 +4,6 @@ import withStyles from 'react-jss';
 
 export const styles = {
   headerContainer: {
-    width: '100%',
     height: '40px',
     border: '1px solid black',
     marginBottom: '10px',
