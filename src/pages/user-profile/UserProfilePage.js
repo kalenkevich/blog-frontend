@@ -1,27 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-
-export const styles = {
-  userProfilePageContainer: {
-    width: '100%',
-    height: '100%',
-    border: '1px solid',
-  },
-};
+import Posts from '../../components/post-list';
+import UserProfile from '../../components/user-profile';
+import UserProfilePageStyle from './UserProfilePageStyle';
+import { getUserAndPosts } from './UserProfilePageService';
 
 const UserProfilePage = (props) => {
   const { classes } = props;
+  const id = '';
+  const { user, isLoading, userPosts } = getForUser(id);
 
   return (
-    <div className={classes.userProfilePageContainer}>
-        User Profile Page
-    </div>
+    <>
+      <UserProfile
+        className={classes.userProfile}
+        user={user}
+        isLoading={isLoading}
+      />
+      <Posts
+        className={classes.userPosts}
+        posts={userPosts}
+        isLoading={isLoading}
+      />
+    </>
   );
 };
 
-UserProfilePage.propTypes = {
-  classes: PropTypes.object.isRequired
+export const getForUser = (id) => {
+  const [user, setUser] = useState({});
+  const [userPosts, setUserPosts] = useState([]);
+  const [isLoading, setLoadingState] = useState(false);
+  const fetchUserAndPosts = async (userId) => {
+    setLoadingState(true);
+
+    const data = await getUserAndPosts(userId);
+
+    setUser(data.user);
+    setUserPosts(data.posts);
+
+    setLoadingState(false);
+  };
+
+  useEffect(() => {
+    fetchUserAndPosts(id);
+  }, []);
+
+  return {
+    user,
+    userPosts,
+    isLoading,
+  };
 };
 
-export default withStyles(styles)(UserProfilePage);
+UserProfilePage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(UserProfilePageStyle)(UserProfilePage);

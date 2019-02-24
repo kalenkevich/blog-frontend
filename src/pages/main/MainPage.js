@@ -5,24 +5,7 @@ import Posts from '../../components/post-list';
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
 import { getPosts, searchPosts } from './MainPageService';
-
-export const styles = {
-  mainPageContainer: {},
-  searchPanel: {
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'center',
-    marginBottom: '50px',
-  },
-  searchPanelButton: {
-    marginLeft: '10px',
-    height: '44px',
-  },
-  searchPanelInput: {
-    width: '100%',
-    height: '44px',
-  },
-};
+import MainPageStyle from './MainPageStyle';
 
 const MainPage = (props) => {
   const { classes } = props;
@@ -88,4 +71,4 @@ MainPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MainPage);
+export default withStyles(MainPageStyle)(MainPage);

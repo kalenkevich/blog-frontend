@@ -53,7 +53,7 @@ export const mockPost = {
   creationDate: 'creation date',
 };
 
-const mockPosts = [];
+export const mockPosts = [];
 
 for (let i = 0; i < 10; i++) {
   mockPosts.push({

@@ -4,13 +4,7 @@ import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import Post from '../../components/post';
 import { getPost } from './PostPageService';
-
-export const styles = {
-  postPageContainer: {
-    width: '100%',
-    height: '100%',
-  },
-};
+import PostPageStyle from './PostPageStyle';
 
 const PostPage = (props) => {
   const { classes } = props;
@@ -52,4 +46,4 @@ PostPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(withStyles(styles)(PostPage));
+export default withRouter(withStyles(PostPageStyle)(PostPage));

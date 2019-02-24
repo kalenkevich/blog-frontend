@@ -5,10 +5,11 @@ const InfinityScrollComponent = (props) => {
   const {
     classes = { root: '' },
     children,
+    className,
   } = props;
 
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} ${className}`}>
       {children}
     </div>
   );
@@ -16,6 +17,8 @@ const InfinityScrollComponent = (props) => {
 
 InfinityScrollComponent.propTypes = {
   classes: PropTypes.object,
+  children: PropTypes.node,
+  className: PropTypes.string,
   onScrolledToEnd: PropTypes.func,
 };
 

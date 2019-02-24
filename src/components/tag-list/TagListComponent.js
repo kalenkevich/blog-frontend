@@ -1,28 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-
-export const TagListComponentStyle = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  tagItem: {
-    padding: '5px',
-    border: `1px solid ${theme.brandPrimaryColor}`,
-    borderRadius: theme.borderRadius,
-    transition: 'background-color linear 100ms',
-    marginRight: '5px',
-    marginTop: '5px',
-    cursor: 'pointer',
-    '&:hover': {
-      backgroundColor: theme.brandPrimaryColor,
-    },
-    '&:last-of-type': {
-      marginRight: '0',
-    },
-  },
-});
+import TagListComponentStyle from './TagListComponentStyle';
 
 const TagListComponent = (props) => {
   const {
