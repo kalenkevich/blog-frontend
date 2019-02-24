@@ -3,10 +3,25 @@ import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import Posts from '../../components/post-list';
 import Input from '../../components/common/input';
+import Button from '../../components/common/button';
 import { getPosts, searchPosts } from './MainPageService';
 
 export const styles = {
   mainPageContainer: {},
+  searchPanel: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center',
+    marginBottom: '50px',
+  },
+  searchPanelButton: {
+    marginLeft: '10px',
+    height: '44px',
+  },
+  searchPanelInput: {
+    width: '100%',
+    height: '44px',
+  },
 };
 
 const MainPage = (props) => {
@@ -15,12 +30,16 @@ const MainPage = (props) => {
     posts,
     fetchMore,
     isLoading,
-    forSearch,
+    forSearchInput,
+    forSearchButton,
   } = forPosts();
 
   return (
     <div className={classes.mainPageContainer}>
-      <Input {...forSearch}/>
+      <div className={classes.searchPanel}>
+        <Input className={classes.searchPanelInput} {...forSearchInput}/>
+        <Button className={classes.searchPanelButton} {...forSearchButton}>Search</Button>
+      </div>
       <Posts
         posts={posts}
         onScrolledToEnd={fetchMore}
@@ -36,6 +55,7 @@ export const forPosts = () => {
   const [isLoading, setLoadingState] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const fetchMore = () => setPage(page + 1);
   const fetchPosts = async () => {
     setLoadingState(true);
 
@@ -45,18 +65,21 @@ export const forPosts = () => {
 
     setLoadingState(false);
   };
-  const fetchMore = () => setPage(page + 1);
+
   useEffect(() => {
     fetchPosts();
-  }, [page, searchQuery]);
+  }, [page]);
 
   return {
     posts,
     fetchMore,
     isLoading,
-    forSearch: {
+    forSearchInput: {
       value: searchQuery,
       onChange: event => setSearchQuery(event.target.value),
+    },
+    forSearchButton: {
+      onClick: () => fetchPosts(),
     },
   };
 };

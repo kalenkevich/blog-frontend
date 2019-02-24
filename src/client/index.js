@@ -1,19 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { loadableReady } from '@loadable/component';
-import { renderRoutes } from 'react-router-config';
-import routes from '../routes';
-import Header from '../components/header';
+import { ThemeProvider } from 'react-jss';
+import Application from '../application';
+import theme from '../theme';
 
 loadableReady(() => ReactDOM.hydrate(
-  <>
-    <Header/>
-    <BrowserRouter>
-      <Switch>
-        {renderRoutes(routes)}
-      </Switch>
-    </BrowserRouter>
-  </>,
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <Application/>
+    </ThemeProvider>
+  </BrowserRouter>,
   document.getElementById('root'),
 ));

@@ -6,13 +6,9 @@ import InfinityScroll from '../common/infinity-scroll';
 import PostListItem from '../post-list-item';
 import PostListLoading from './PostListComponentLoading';
 
-export const styles = {
-  mainPageContainer: {
-    width: '100%',
-    height: '100%',
-    border: '1px solid',
-  },
-};
+export const styles = theme => ({
+  mainPageContainer: {},
+});
 
 const PostList = (props) => {
   const {
