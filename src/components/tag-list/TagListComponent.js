@@ -9,7 +9,6 @@ const TagListComponent = (props) => {
     tags,
     onTagClick,
     className,
-    editable,
   } = props;
 
   return (

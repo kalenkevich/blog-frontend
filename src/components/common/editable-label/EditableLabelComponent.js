@@ -13,7 +13,15 @@ const EditableLabelComponent = (props) => {
     placeholder,
   } = props;
   const [isEdit, setEditState] = useState(false);
-  const onValueChange = event => onChange(event.target.value);
+  const [currentValue, setCurrentValue] = useState(value);
+  const onCloseEditState = () => {
+    setEditState(false);
+
+    if (currentValue) {
+      onChange(currentValue);
+      setCurrentValue('');
+    }
+  };
 
   if (!isEdit) {
     return (
@@ -27,9 +35,9 @@ const EditableLabelComponent = (props) => {
 
   return <Input
     className={`${classes.input} ${className}`}
-    value={value}
-    onChange={onValueChange}
-    onBlur={() => setEditState(false)}
+    value={currentValue || value}
+    onChange={e => setCurrentValue(e.target.value)}
+    onBlur={onCloseEditState}
     placeholder={placeholder}
     autoFocus
   />;

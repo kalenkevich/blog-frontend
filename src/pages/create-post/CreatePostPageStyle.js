@@ -14,7 +14,11 @@ export default (theme) => {
     },
     actionButton: signInPageStyle.actionButton,
     content: {
-      height: '600px',
+      minHeight: '600px',
+    },
+    title: {
+      fontSize: '24px',
+      height: '42px',
     },
     actionButtonPanel: {
       justifyContent: 'flex-end',

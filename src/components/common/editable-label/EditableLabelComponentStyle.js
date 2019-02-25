@@ -4,6 +4,9 @@ export default theme => ({
     padding: '8px 6px',
     height: '32px',
     boxSizing: 'border-box',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
     '&:hover': {
       padding: '7px 5px',
       backgroundColor: '#CCCCCC',
