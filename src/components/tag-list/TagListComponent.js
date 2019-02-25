@@ -9,6 +9,7 @@ const TagListComponent = (props) => {
     tags,
     onTagClick,
     className,
+    editable,
   } = props;
 
   return (
@@ -28,6 +29,7 @@ const TagListComponent = (props) => {
 TagListComponent.propTypes = {
   classes: PropTypes.object,
   className: PropTypes.string,
+  editable: PropTypes.bool,
   tags: PropTypes.array,
   onTagClick: PropTypes.func,
 };
