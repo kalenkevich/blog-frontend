@@ -10,7 +10,7 @@
     "start": "node dist/server.js",
     "start:dev:client": "webpack-dev-server --open --config webpack.client.js",
     "lint": "eslint --config .eslintrc.js src",
-    "test": "jest"
+    "test": "npm run lint && jest"
   },
   "keywords": [],
   "author": "",

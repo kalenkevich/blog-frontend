@@ -28,6 +28,7 @@ const TagListComponent = (props) => {
 TagListComponent.propTypes = {
   classes: PropTypes.object,
   className: PropTypes.string,
+  editable: PropTypes.bool,
   tags: PropTypes.array,
   onTagClick: PropTypes.func,
 };

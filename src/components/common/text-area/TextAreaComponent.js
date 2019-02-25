@@ -1,23 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyle from 'react-jss';
-import InputComponentStyle from './InputComponentStyle';
+import TextAreaComponentStyle from './TextAreaComponentStyle';
 
-const InputComponent = (props) => {
+const TextAreaComponent = (props) => {
   const {
     classes,
     value,
     onChange,
     className = '',
-    type = 'text',
     placeholder = '',
     onBlur = () => {},
     autoFocus = false,
   } = props;
 
   return (
-    <input
-      type={type}
+    <textarea
       placeholder={placeholder}
       className={`${classes.root} ${className}`}
       value={value}
@@ -28,7 +26,7 @@ const InputComponent = (props) => {
   );
 };
 
-InputComponent.propTypes = {
+TextAreaComponent.propTypes = {
   classes: PropTypes.object,
   className: PropTypes.string,
   value: PropTypes.string.isRequired,
@@ -39,4 +37,4 @@ InputComponent.propTypes = {
   placeholder: PropTypes.string,
 };
 
-export default withStyle(InputComponentStyle)(InputComponent);
+export default withStyle(TextAreaComponentStyle)(TextAreaComponent);
