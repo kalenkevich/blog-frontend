@@ -28,6 +28,7 @@ const PostList = (props) => {
 
 PostList.propTypes = {
   classes: PropTypes.object.isRequired,
+  className: PropTypes.string,
   posts: PropTypes.array.isRequired,
   onPostClick: PropTypes.func,
   onScrolledToEnd: PropTypes.func,

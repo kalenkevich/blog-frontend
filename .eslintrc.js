@@ -16,6 +16,7 @@ module.exports = {
   },
   rules: {
     'no-use-before-define': 'off',
+    'max-len': ['error', { code: 120 }],
     'indent': ['error', 2, {
       SwitchCase: 1,
       VariableDeclarator: 1,

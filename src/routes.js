@@ -47,5 +47,6 @@ export default [{
   exact: true,
 }, {
   path: '/',
+  // eslint-disable-next-line react/display-name
   render: () => <Redirect to='/posts'/>,
 }];

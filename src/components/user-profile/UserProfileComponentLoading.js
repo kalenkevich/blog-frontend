@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 
-export const styles = (theme) => ({
+export const styles = () => ({
 
 });
 
-const UserProfileComponentLoading = ({ classes }) => (
+const UserProfileComponentLoading = () => (
   <div></div>
 );
 

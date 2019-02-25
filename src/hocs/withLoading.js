@@ -1,13 +1,10 @@
 import React from 'react';
 
-export default LoadingComponent => {
-  return (Component) => {
-    return ({ isLoading, ...restProps}) => {
-      if (isLoading) {
-        return <LoadingComponent/>;
-      }
-
-      return <Component {...restProps} />;
-    }
+// eslint-disable-next-line react/prop-types, react/display-name
+export default LoadingComponent => Component => ({ isLoading, ...restProps }) => {
+  if (isLoading) {
+    return <LoadingComponent/>;
   }
-}
+
+  return <Component {...restProps} />;
+};

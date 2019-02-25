@@ -1,9 +1,5 @@
 import createBrowserHistory from 'history/createBrowserHistory';
 
-let history;
-
-if (IS_CLIENT) {
-  history = createBrowserHistory();
-}
+const history = IS_CLIENT ? createBrowserHistory() : null;
 
 export default history;

@@ -9,7 +9,7 @@
     "build:server": "webpack --config webpack.server.js",
     "start": "node dist/server.js",
     "start:dev:client": "webpack-dev-server --open --config webpack.client.js",
-    "lint": "eslint --config .eslintrc",
+    "lint": "eslint --config ./.eslintrc.js src",
     "test": "jest"
   },
   "keywords": [],
