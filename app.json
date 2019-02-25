@@ -13,6 +13,9 @@
   },
   "name": "blog",
   "scripts": {
+    "test-setup": "npm install",
+    "lint": "npm run lint",
+    "test": "npm run test"
   },
   "stack": "heroku-18"
 }
