@@ -5,6 +5,9 @@ import loadable from '@loadable/component';
 export const PostPage = loadable(
   () => import(/* webpackChunkName: "PostPage" */ './pages/post'),
 );
+export const CreatePostPage = loadable(
+  () => import(/* webpackChunkName: "UserProfilePage" */ './pages/create-post'),
+);
 export const PostsPage = loadable(
   () => import(/* webpackChunkName: "MainPage" */ './pages/main'),
 );
@@ -19,6 +22,10 @@ export const UserProfilePage = loadable(
 );
 
 export default [{
+  component: CreatePostPage,
+  path: '/post/create',
+  exact: true,
+}, {
   component: PostPage,
   path: '/post/:postId',
   exact: true,
