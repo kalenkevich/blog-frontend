@@ -19,13 +19,6 @@ module.exports = {
     dns: 'empty',
     module: 'empty',
   },
-  module: {
-    rules: [{
-      test: /\.js(x?)$/,
-      exclude: /node_modules/,
-      use: 'babel-loader',
-    }],
-  },
   plugins: [
     new webpack.DefinePlugin({
       ...globals,
