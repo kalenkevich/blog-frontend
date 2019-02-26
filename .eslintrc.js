@@ -13,6 +13,7 @@ module.exports = {
   globals: {
     'IS_CLIENT': true,
     'IS_SERVER': true,
+    'ENVIRONMENT': true,
   },
   rules: {
     'no-use-before-define': 'off',
