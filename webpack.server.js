@@ -7,7 +7,7 @@ const { globals } = require('./webpack.common');
 module.exports = {
   ...commonWebpackConfig,
   entry: {
-    server: './src/server/index.js',
+    server: './src/server.js',
   },
   target: 'node',
   node: {
@@ -20,7 +20,6 @@ module.exports = {
     module: 'empty',
   },
   plugins: [
-    ...commonWebpackConfig.plugins,
     new webpack.DefinePlugin({
       ...globals,
       IS_CLIENT: false,

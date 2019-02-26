@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 
 const nodeEnv = process.env.NODE_ENV;
 const isProductionMode = nodeEnv === 'production';
@@ -26,9 +25,6 @@ module.exports = {
       use: 'babel-loader',
     }],
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
   optimization: {
     splitChunks: {
       chunks: 'all',

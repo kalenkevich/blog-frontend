@@ -7,7 +7,6 @@
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/plugin-transform-runtime",
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    "babel-plugin-styled-components",
     "@babel/plugin-syntax-dynamic-import",
     "@loadable/babel-plugin"
   ]
