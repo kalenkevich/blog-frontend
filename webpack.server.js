@@ -7,7 +7,7 @@ const { globals } = require('./webpack.common');
 module.exports = {
   ...commonWebpackConfig,
   entry: {
-    server: './src/server/index.js',
+    server: './src/server.js',
   },
   target: 'node',
   node: {
@@ -19,8 +19,14 @@ module.exports = {
     dns: 'empty',
     module: 'empty',
   },
+  module: {
+    rules: [{
+      test: /\.js(x?)$/,
+      exclude: /node_modules/,
+      use: 'babel-loader',
+    }],
+  },
   plugins: [
-    ...commonWebpackConfig.plugins,
     new webpack.DefinePlugin({
       ...globals,
       IS_CLIENT: false,

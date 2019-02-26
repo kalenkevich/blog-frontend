@@ -1,14 +1,14 @@
 const webpack = require('webpack');
-const commonWebpackConfig = require('./webpack.common');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const commonWebpackConfig = require('./webpack.common');
 const { globals } = require('./webpack.common');
 
 module.exports = {
   ...commonWebpackConfig,
   entry: {
-    client: './src/client/index.js',
+    client: './src/client.js',
   },
   target: 'web',
   devServer: {
@@ -23,7 +23,7 @@ module.exports = {
     },
   },
   plugins: [
-    ...commonWebpackConfig.plugins,
+    new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin('dist'),
     new LoadablePlugin(),
     new HtmlWebpackPlugin({

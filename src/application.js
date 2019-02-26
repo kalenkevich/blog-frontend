@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from 'react-jss';
-import { Switch } from 'react-router-dom';
-import { renderRoutes } from 'react-router-config';
-import routes from './routes';
+import withStyles, { ThemeProvider } from 'react-jss';
 import Header from './components/header';
+import theme from './theme';
 
 export const ApplicationStyles = {
   applicationWrapper: {
@@ -17,21 +15,22 @@ export const ApplicationStyles = {
   },
 };
 
-const Application = ({ classes }) => (
-  <>
-    <Header/>
-    <div className={classes.applicationWrapper}>
-      <div className={classes.application}>
-        <Switch>
-          {renderRoutes(routes)}
-        </Switch>
+const Application = ({ classes, children }) => (
+  <ThemeProvider theme={theme}>
+    <>
+      <Header/>
+      <div className={classes.applicationWrapper}>
+        <div className={classes.application}>
+          {children}
+        </div>
       </div>
-    </div>
-  </>
+    </>
+  </ThemeProvider>
 );
 
 Application.propTypes = {
   classes: PropTypes.object.isRequired,
+  children: PropTypes.node,
 };
 
 export default withStyles(ApplicationStyles)(Application);

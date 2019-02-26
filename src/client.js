@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { loadableReady } from '@loadable/component';
-import { ThemeProvider } from 'react-jss';
-import Application from '../application';
-import theme from '../theme';
+import { renderRoutes } from 'react-router-config';
+import routes from './routes';
+import Application from './application';
 
 loadableReady(() => ReactDOM.hydrate(
   <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <Application/>
-    </ThemeProvider>
+    <Application>
+      {renderRoutes(routes)}
+    </Application>
   </BrowserRouter>,
   document.getElementById('root'),
 ));
