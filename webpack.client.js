@@ -36,6 +36,7 @@ module.exports = {
       ...globals,
       IS_CLIENT: true,
       IS_SERVER: false,
+      'process.env': JSON.stringify(process.env),
     }),
   ],
 };
