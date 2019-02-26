@@ -21,6 +21,7 @@ const Application = ({ classes, children, settings }) => (
     <>
       <Header/>
       {settings.App.Name}
+      {settings.App.Name}
       <div className={classes.applicationWrapper}>
         <div className={classes.application}>
           {children}
