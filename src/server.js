@@ -31,6 +31,7 @@ const htmlTemplate = (reactDom, scriptTags, sheets) => `
   </html>
 `;
 
+// eslint-disable-next-line no-unused-vars
 const renderMiddleware = async (req, res, next) => {
   const [{ route }] = matchRoutes(routes, req.originalUrl);
 
@@ -64,9 +65,9 @@ const renderMiddleware = async (req, res, next) => {
   return next(req, res);
 };
 
-app.get('*', renderMiddleware);
-app.use(express.static('public'));
-
-app.listen(port, () => console.log('Server running of port:', port));
-
-export default app;
+app.set('port', port);
+app.use('/public', express.static(`${__dirname}/../public`));
+app.use('/', express.static(`${__dirname}/../dist`));
+app.get('*', (req, res) => res.sendFile('index.html', { root: `${__dirname}/../dist` }));
+// eslint-disable-next-line no-console
+app.listen(port, () => console.log(`Server running on port: ${port}`));
