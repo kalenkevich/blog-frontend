@@ -1,7 +1,6 @@
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import settings from '../../config/settings';
-import Logger from './Logger';
 import NotificationService from './NotificationService';
 
 const defaultClientConfig = {

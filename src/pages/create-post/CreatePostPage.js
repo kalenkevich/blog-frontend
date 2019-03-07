@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import { createPost } from './CreatePostPageService';
+import { withRouter } from 'react-router-dom';
+import PostService from '../../services/PostService';
 import CreatePostPageStyles from './CreatePostPageStyle';
 import Button from '../../components/common/button';
 import EditableCategories from '../../components/categories-editable';
@@ -9,10 +10,15 @@ import EditableLabel from '../../components/common/editable-label';
 import EditableText from '../../components/common/editable-text';
 
 const CreatePostPage = (props) => {
-  const { classes } = props;
+  const { classes, history } = props;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [categories, setCategories] = useState([]);
+  const createPost = async () => {
+    const post = await PostService.createPost(title, content, categories);
+
+    history.push(`/post/${post.id}`);
+  };
 
   return (
     <div className={classes.form}>
@@ -38,7 +44,7 @@ const CreatePostPage = (props) => {
           Cancel
         </Button>
         <Button className={classes.actionButton}
-          onClick={() => createPost(title, content, categories)}
+          onClick={createPost}
         >
           Save
         </Button>
@@ -49,6 +55,7 @@ const CreatePostPage = (props) => {
 
 CreatePostPage.propTypes = {
   classes: PropTypes.object,
+  history: PropTypes.object,
 };
 
-export default withStyles(CreatePostPageStyles)(CreatePostPage);
+export default withRouter(withStyles(CreatePostPageStyles)(CreatePostPage));

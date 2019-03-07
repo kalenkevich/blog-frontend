@@ -16,7 +16,7 @@ const SignUpPage = (props) => {
   const forPasswordInput = getForInput({ placeholder: 'Password', type: 'password' });
   const forRepeatPasswordInput = getForInput({ placeholder: 'Repeat Password', type: 'password' });
   const trySignUp = async () => {
-    const [, error] = await signUp(forEmailInput.value, forEmailInput.value, forPasswordInput.value);
+    const [, error] = await signUp(forNameInput.value, forEmailInput.value, forPasswordInput.value);
 
     if (error) {
       forErrorLabel.setSignUpError(error.message);

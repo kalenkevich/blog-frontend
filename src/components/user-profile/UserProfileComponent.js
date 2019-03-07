@@ -16,7 +16,6 @@ const UserProfileComponent = (props) => {
     <div className={`${className} ${classes.userProfilePageContainer}`}>
       <div>
         <img className={classes.userAvatarUrl} src={user.avatarUrl}/>
-        <div className={classes.userRate}>Rate: {user.rate}</div>
       </div>
       <div className={classes.userDetails}>
         <div className={classes.userName}>{user.name}</div>

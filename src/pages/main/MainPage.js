@@ -4,7 +4,7 @@ import withStyles from 'react-jss';
 import Posts from '../../components/post-list';
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
-import { getPosts, searchPosts } from './MainPageService';
+import PostService from '../../services/PostService';
 import MainPageStyle from './MainPageStyle';
 
 const MainPage = (props) => {
@@ -42,7 +42,7 @@ export const forPosts = () => {
   const fetchPosts = async () => {
     setLoadingState(true);
 
-    const fetchedPosts = searchQuery ? await searchPosts({ searchQuery, page }) : await getPosts({ page });
+    const fetchedPosts = searchQuery ? await PostService.searchPosts(searchQuery, page) : await PostService.getPosts(page);
 
     setPosts(fetchedPosts);
 

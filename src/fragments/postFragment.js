@@ -24,3 +24,22 @@ export default gql`
   ${CategoryFragment}
   ${CommentFragment}
 `;
+
+export const PostPreviewFragment = gql`
+  fragment PostPreviewFragment on PostPreview {
+    id
+    title
+    contentPreview
+    author {
+      ...UserFragment
+    }
+    rate
+    categories {
+      ...CategoryFragment
+    }
+    commentsCount
+    creationDate
+  }
+  ${UserFragment}
+  ${CategoryFragment}
+`;

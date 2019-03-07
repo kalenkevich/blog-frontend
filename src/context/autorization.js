@@ -26,7 +26,6 @@ const AuthorizationComponent = ({ children, history }) => {
       user = await AuthorizationService.authorize();
 
       setAuthorizedUser(user);
-      history.push('');
     } catch (e) {
       error = e;
     } finally {

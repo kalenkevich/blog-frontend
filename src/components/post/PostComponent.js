@@ -26,7 +26,7 @@ const PostComponent = (props) => {
         <div className={classes.footer}>
           <div className={classes.createdUserPanel}>
             <span>Created by</span>
-            <Link className={classes.createdUserName} to={`/user/${post.user.id}`}>{post.user.name}</Link>
+            <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>{post.author.name}</Link>
           </div>
           <div className={classes.rateWrapper}>
             <Button className={classes.rateActionButton}>Up</Button>

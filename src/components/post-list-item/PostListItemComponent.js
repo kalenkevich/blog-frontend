@@ -22,7 +22,7 @@ const PostListItem = (props) => {
         <Link className={classes.title} to={`/post/${post.id}`}>
           <h3>{post.title}</h3>
         </Link>
-        <div className={classes.contentPreview}>{post.content}</div>
+        <div className={classes.contentPreview}>{post.contentPreview}</div>
         <div className={classes.footer}>
           <div className={classes.createdUserPanel}>
             <span>Posted by</span>
