@@ -1,4 +1,4 @@
-import TagListComponentStyle from '../tag-list/TagListComponentStyle';
+import TagListComponentStyle from '../categories/CategoriesComponentStyle';
 
 export default (theme) => {
   const tagListComponentStyle = TagListComponentStyle(theme);
@@ -8,8 +8,8 @@ export default (theme) => {
       ...tagListComponentStyle.root,
       alignItems: 'center',
     },
-    tagItem: {
-      ...tagListComponentStyle.tagItem,
+    category: {
+      ...tagListComponentStyle.category,
       transition: 'none',
       padding: '0',
       display: 'flex',
@@ -18,16 +18,16 @@ export default (theme) => {
         backgroundColor: 'none',
       },
     },
-    tagItemRemove: {
+    removeCategory: {
       margin: '0 5px',
     },
-    newTagItem: {
+    newCategory: {
       marginRight: '5px',
       marginTop: '5px',
       marginLeft: '5px',
       width: '100px',
     },
-    editTagItem: {
+    editCategory: {
       width: '100px',
       backgroundColor: 'transparent',
       border: 'none',

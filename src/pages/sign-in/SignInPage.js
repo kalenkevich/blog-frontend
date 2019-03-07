@@ -4,11 +4,11 @@ import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
-import { signIn } from './SignInPageService';
 import SignInPageStyle from './SignInPageStyle';
+import withAuthorization from '../../hocs/withAuthorization';
 
 const SignInPage = (props) => {
-  const { classes, history } = props;
+  const { classes, history, signIn } = props;
   const forEmailInput = getForInput({ placeholder: 'Email' });
   const forPasswordInput = getForInput({ placeholder: 'Password', type: 'password' });
 
@@ -48,6 +48,7 @@ export const getForInput = (props) => {
 SignInPage.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object,
+  signIn: PropTypes.func,
 };
 
-export default withRouter(withStyles(SignInPageStyle)(SignInPage));
+export default withAuthorization(withRouter(withStyles(SignInPageStyle)(SignInPage)));

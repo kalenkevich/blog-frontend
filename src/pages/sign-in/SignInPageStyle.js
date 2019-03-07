@@ -12,6 +12,14 @@ export default theme => ({
     border: `1px solid ${theme.brandPrimaryColor}`,
     borderRadius: theme.borderRadius,
   },
+  formLabel: {
+    width: '100%',
+    display: 'flex',
+    marginBottom: '10px',
+    'last-of-type': {
+      marginBottom: 'none',
+    },
+  },
   formField: {
     width: '100%',
     display: 'flex',

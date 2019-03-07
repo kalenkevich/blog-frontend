@@ -6,7 +6,7 @@ import Button from '../common/button';
 import withLoading from '../../hocs/withLoading';
 import PostComponentLoading from './PostComponentLoading';
 import PostComponentStyle from './PostComponentStyle';
-import TagList from '../tag-list';
+import Categories from '../categories';
 import CommentList from '../comment-list';
 
 const PostComponent = (props) => {
@@ -36,7 +36,7 @@ const PostComponent = (props) => {
           <div className={classes.creationDate}>{post.creationDate}</div>
         </div>
       </div>
-      <TagList className={classes.tags} tags={post.tags}/>
+      <Categories className={classes.categories} categories={post.categories}/>
       <CommentList className={classes.comments} comments={post.comments}/>
     </>
   );

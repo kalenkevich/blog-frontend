@@ -3,60 +3,57 @@ import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { Link, withRouter } from 'react-router-dom';
 import Button from '../common/button';
-
-export const styles = theme => ({
-  headerContainer: {
-    height: '40px',
-    padding: '10px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '10px',
-    border: `1px solid ${theme.brandPrimaryColor}`,
-    borderRadius: theme.borderRadius,
-  },
-  brandTitle: {
-    fontSize: '24px',
-    textDecoration: 'none',
-    color: theme.titleColor,
-    '&:hover': {
-      color: theme.titleHoverColor,
-    },
-  },
-  actionPanel: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  actionPanelButton: {
-    marginRight: '10px',
-    '&:last-of-type': {
-      marginRight: '0',
-    },
-  },
-});
+import withAuthorization from '../../hocs/withAuthorization';
+import HeaderComponentStyle from './HeaderComponentStyle';
 
 const HeaderComponent = (props) => {
-  const { classes, history } = props;
+  const {
+    classes,
+    history,
+    authorizedUser,
+    signOut,
+  } = props;
   const currentLocation = history.location.pathname;
-  const canShowSignPanel = !['/sign-in', '/sign-up'].includes(currentLocation);
+  const canShowSignUpPanel = !['/sign-in', '/sign-up'].includes(currentLocation);
+
+  let ResultPanel = null;
+  if (authorizedUser) {
+    ResultPanel = (
+      <div className={classes.actionPanel}>
+        <Button className={classes.actionPanelButton}>
+          Hello {authorizedUser.name}
+        </Button>
+        <Button className={classes.actionPanelButton}
+          onClick={() => history.push('/post/create')}
+        >
+          Create new Post
+        </Button>
+        <Button className={classes.actionPanelButton} onClick={signOut}>
+          Sign Out
+        </Button>
+      </div>
+    );
+  } else if (canShowSignUpPanel) {
+    ResultPanel = (
+      <div className={classes.actionPanel}>
+        <Button className={classes.actionPanelButton}
+          onClick={() => history.push('/sign-in')}
+        >
+          Sign In
+        </Button>
+        <Button className={classes.actionPanelButton}
+          onClick={() => history.push('/sign-up')}
+        >
+          Sign Up
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className={classes.headerContainer}>
       <Link className={classes.brandTitle} to='/'>Header</Link>
-      { canShowSignPanel
-        ? (<div className={classes.actionPanel}>
-          <Button className={classes.actionPanelButton}
-            onClick={() => history.push('/sign-in')}
-          >
-              Sign In
-          </Button>
-          <Button className={classes.actionPanelButton}
-            onClick={() => history.push('/sign-up')}
-          >
-              Sign Up
-          </Button>
-        </div>)
-        : null}
+      {ResultPanel}
     </div>
   );
 };
@@ -64,6 +61,8 @@ const HeaderComponent = (props) => {
 HeaderComponent.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object,
+  authorizedUser: PropTypes.object,
+  signOut: PropTypes.func,
 };
 
-export default withRouter(withStyles(styles)(HeaderComponent));
+export default withAuthorization(withRouter(withStyles(HeaderComponentStyle)(HeaderComponent)));

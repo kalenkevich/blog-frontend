@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import Button from '../common/button';
-import TagList from '../tag-list';
+import Categories from '../categories';
 import PostListItemComponentStyle from './PostListItemComponentStyle';
 
 const PostListItem = (props) => {
@@ -22,11 +22,11 @@ const PostListItem = (props) => {
         <Link className={classes.title} to={`/post/${post.id}`}>
           <h3>{post.title}</h3>
         </Link>
-        <div className={classes.contentPreview}>{post.contentPreview}</div>
+        <div className={classes.contentPreview}>{post.content}</div>
         <div className={classes.footer}>
           <div className={classes.createdUserPanel}>
             <span>Posted by</span>
-            <Link className={classes.createdUserName} to={`/user/${post.user.id}`}>{post.user.name}</Link>
+            <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>{post.author.name}</Link>
           </div>
           <div className={classes.rateWrapper}>
             <Button className={classes.rateActionButton}>Up</Button>
@@ -37,7 +37,7 @@ const PostListItem = (props) => {
           <div className={classes.creationDate}>{post.creationDate}</div>
         </div>
       </div>
-      <TagList className={classes.tags} tags={post.tags}/>
+      <Categories className={classes.categories} categories={post.categories}/>
     </>
   );
 };

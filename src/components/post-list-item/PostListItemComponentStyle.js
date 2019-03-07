@@ -40,7 +40,7 @@ export default theme => ({
   commentsCount: {},
   creationDate: {},
   createdUserPanel: {},
-  tags: {
+  categories: {
     marginTop: '10px',
     marginBottom: '50px',
     '&:last-of-type': {

@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { loadableReady } from '@loadable/component';
 import { renderRoutes } from 'react-router-config';
+import { ThemeProvider } from 'react-jss';
 import routes from './routes';
-import Application from './application';
-import { SettingsProvider } from './context/settings';
-import settings from '../config/settings';
+import Application from './application/ApplicationComponent';
+import theme from './theme';
 
 loadableReady(() => ReactDOM.hydrate(
   <BrowserRouter>
-    <SettingsProvider value={settings}>
+    <ThemeProvider theme={theme}>
       <Application>
         {renderRoutes(routes)}
       </Application>
-    </SettingsProvider>
+    </ThemeProvider>
   </BrowserRouter>,
   document.getElementById('root'),
 ));

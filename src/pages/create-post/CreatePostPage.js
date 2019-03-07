@@ -4,7 +4,7 @@ import withStyles from 'react-jss';
 import { createPost } from './CreatePostPageService';
 import CreatePostPageStyles from './CreatePostPageStyle';
 import Button from '../../components/common/button';
-import EditableTags from '../../components/tag-list-editable';
+import EditableCategories from '../../components/categories-editable';
 import EditableLabel from '../../components/common/editable-label';
 import EditableText from '../../components/common/editable-text';
 
@@ -12,7 +12,7 @@ const CreatePostPage = (props) => {
   const { classes } = props;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [tags, setTags] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   return (
     <div className={classes.form}>
@@ -28,17 +28,17 @@ const CreatePostPage = (props) => {
         value={content}
         onChange={setContent}
       />
-      <EditableTags
+      <EditableCategories
         className={classes.formField}
-        tags={tags}
-        onChange={setTags}
+        categories={categories}
+        onChange={setCategories}
       />
       <div className={`${classes.formField} ${classes.actionButtonPanel}`}>
         <Button className={classes.actionButton}>
           Cancel
         </Button>
         <Button className={classes.actionButton}
-          onClick={() => createPost(title, content, tags)}
+          onClick={() => createPost(title, content, categories)}
         >
           Save
         </Button>

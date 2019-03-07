@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import PostListItemComponentLoading from '../post-list-item/PostListItemComponentLoading';
 
-export const styles = {};
+export const styles = {
+  root: {},
+};
 
 const PostListLoading = ({ classes }) => (
   <div className={classes.root}>
+    <PostListItemComponentLoading/>
+    <PostListItemComponentLoading/>
     <PostListItemComponentLoading/>
     <PostListItemComponentLoading/>
     <PostListItemComponentLoading/>

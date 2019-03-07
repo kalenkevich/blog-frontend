@@ -1,6 +1,6 @@
 export default {
   Backend: {
-    Url: '',
+    Url: 'http://localhost:9000',
   },
   App: {
     Name: 'Development',

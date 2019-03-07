@@ -3,7 +3,7 @@ export default theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-  tagItem: {
+  category: {
     padding: '5px',
     border: `1px solid ${theme.brandPrimaryColor}`,
     borderRadius: theme.borderRadius,
