@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { Link } from 'react-router-dom';
 import Button from '../common/button';
+import { getFormattedDate } from '../../services/Formatter';
 import CommentListComponentStyle from './CommentListComponentStyle';
 
 const CommentListComponent = (props) => {
@@ -21,8 +22,9 @@ const CommentListComponent = (props) => {
           onClick={() => onCommentClick(comment)}
           className={classes.commentItem}
         >
-          <div className={classes.userPanel}>
-            <div className={classes.postedPanel}>
+          <p className={classes.content}>{comment.content}</p>
+          <div className={classes.footer}>
+            <div className={classes.createdUserPanel}>
               <span>Posted by</span>
               <Link className={classes.createdUserName} to={`/user/${comment.author.id}`}>{comment.author.name}</Link>
             </div>
@@ -31,9 +33,8 @@ const CommentListComponent = (props) => {
               <div className={classes.rateLabel}>{comment.rate}</div>
               <Button className={classes.rateActionButton}>Down</Button>
             </div>
+            <div className={classes.creationDate}>{getFormattedDate(comment.creationDate)}</div>
           </div>
-          <div className={classes.content}>{comment.content}</div>
-          <div className={classes.creationDate}>{comment.creationDate}</div>
         </div>
       ))}
     </div>

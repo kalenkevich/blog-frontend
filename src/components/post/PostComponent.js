@@ -8,9 +8,19 @@ import PostComponentLoading from './PostComponentLoading';
 import PostComponentStyle from './PostComponentStyle';
 import Categories from '../categories';
 import CommentList from '../comment-list';
+import CommentCreate from '../comment-create';
+import withAuthorization from '../../hocs/withAuthorization';
+import { getFormattedDate } from '../../services/Formatter';
 
 const PostComponent = (props) => {
-  const { classes, post } = props;
+  const {
+    classes,
+    post,
+    authorizedUser,
+    onAddComment,
+    onUpdateComment,
+    onDeleteComment,
+  } = props;
 
   if (!post) {
     return null;
@@ -33,11 +43,17 @@ const PostComponent = (props) => {
             <div className={classes.rateLabel}>{post.rate}</div>
             <Button className={classes.rateActionButton}>Down</Button>
           </div>
-          <div className={classes.creationDate}>{post.creationDate}</div>
+          <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>
         </div>
       </div>
       <Categories className={classes.categories} categories={post.categories}/>
-      <CommentList className={classes.comments} comments={post.comments}/>
+      {authorizedUser && <CommentCreate onAdd={onAddComment}/>}
+      <CommentList
+        className={classes.comments}
+        comments={post.comments}
+        onUpdate={onUpdateComment}
+        onDelete={onDeleteComment}
+      />
     </>
   );
 };
@@ -45,8 +61,12 @@ const PostComponent = (props) => {
 PostComponent.propTypes = {
   classes: PropTypes.object,
   post: PropTypes.object,
+  authorizedUser: PropTypes.object,
+  onAddComment: PropTypes.func,
+  onUpdateComment: PropTypes.func,
+  onDeleteComment: PropTypes.func,
 };
 
 export const StyledPostComponent = withStyle(PostComponentStyle)(PostComponent);
 
-export default withLoading(PostComponentLoading)(StyledPostComponent);
+export default withAuthorization(withLoading(PostComponentLoading)(StyledPostComponent));

@@ -1,6 +1,6 @@
 export default theme => ({
   root: {
-    padding: '5px',
+    padding: '10px',
     border: `1px solid ${theme.brandPrimaryColor}`,
     borderRadius: theme.borderRadius,
   },
@@ -13,11 +13,16 @@ export default theme => ({
   },
   contentPreview: {
     whiteSpace: 'pre-line',
+    marginBottom: '10px',
+  },
+  content: {
+    whiteSpace: 'pre-line',
+    marginBottom: '10px',
   },
   footer: {
     display: 'flex',
-    borderTop: `1px solid ${theme.titleColor}`,
-    paddingTop: '5px',
+    borderTop: `1px solid ${theme.brandPrimaryColor}`,
+    paddingTop: '10px',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -30,6 +35,7 @@ export default theme => ({
     },
   },
   rateWrapper: {
+    width: '30%',
     display: 'flex',
     alignItems: 'center',
   },
@@ -37,9 +43,17 @@ export default theme => ({
     padding: '0 10px',
   },
   rateActionButton: {},
-  commentsCount: {},
-  creationDate: {},
-  createdUserPanel: {},
+  commentsCount: {
+    width: '20%',
+  },
+  creationDate: {
+    width: '20%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  createdUserPanel: {
+    width: '30%',
+  },
   categories: {
     marginTop: '10px',
     marginBottom: '50px',

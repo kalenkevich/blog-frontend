@@ -5,6 +5,7 @@ import withStyles from 'react-jss';
 import Button from '../common/button';
 import Categories from '../categories';
 import PostListItemComponentStyle from './PostListItemComponentStyle';
+import { getFormattedDate } from '../../services/Formatter';
 
 const PostListItem = (props) => {
   const {
@@ -33,8 +34,8 @@ const PostListItem = (props) => {
             <div className={classes.rateLabel}>{post.rate}</div>
             <Button className={classes.rateActionButton}>Down</Button>
           </div>
-          <div className={classes.commentsCount}>Comments {post.commentsCount}</div>
-          <div className={classes.creationDate}>{post.creationDate}</div>
+          <div className={classes.commentsCount}>{post.commentsCount} comments</div>
+          <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>
         </div>
       </div>
       <Categories className={classes.categories} categories={post.categories}/>

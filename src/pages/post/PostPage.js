@@ -13,9 +13,7 @@ const PostPage = (props) => {
 
   return (
     <div className={classes.postPageContainer}>
-      <Post
-        {...forPost}
-      />
+      <Post {...forPost}/>
     </div>
   );
 };
@@ -31,6 +29,17 @@ export const getForPost = (id) => {
     setPost(fetchedPost);
     setLoadingState(false);
   };
+  const addComment = async (comment) => {
+    await PostService.addComment(post.id, comment);
+  };
+
+  const updateComment = async (comment) => {
+    await PostService.updateComment(comment);
+  };
+
+  const deleteComment = async (commentId) => {
+    await PostService.deleteComment(commentId);
+  };
 
   useEffect(() => {
     fetchPost(id);
@@ -39,6 +48,9 @@ export const getForPost = (id) => {
   return {
     post,
     isLoading,
+    onAddComment: addComment,
+    onUpdateComment: updateComment,
+    onDeleteComment: deleteComment,
   };
 };
 
