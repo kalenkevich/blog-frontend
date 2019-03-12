@@ -30,15 +30,30 @@ export const getForPost = (id) => {
     setLoadingState(false);
   };
   const addComment = async (comment) => {
-    await PostService.addComment(post.id, comment);
+    setLoadingState(true);
+
+    const updatedPost = await PostService.addComment(post.id, comment);
+
+    setPost(updatedPost);
+    setLoadingState(false);
   };
 
   const updateComment = async (comment) => {
-    await PostService.updateComment(comment);
+    setLoadingState(true);
+
+    const updatedPost = await PostService.updateComment(comment);
+
+    setPost(updatedPost);
+    setLoadingState(false);
   };
 
   const deleteComment = async (commentId) => {
-    await PostService.deleteComment(commentId);
+    setLoadingState(true);
+
+    const updatedPost = await PostService.deleteComment(commentId);
+
+    setPost(updatedPost);
+    setLoadingState(false);
   };
 
   useEffect(() => {

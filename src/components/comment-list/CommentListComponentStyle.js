@@ -21,7 +21,13 @@ export default (theme) => {
         marginTop: '10px',
       },
     },
-    content: postComponentStyle.content,
+    contentWrapper: {
+      display: 'flex',
+    },
+    content: {
+      ...postComponentStyle.content,
+      width: '100%',
+    },
     footer: postComponentStyle.footer,
     rateWrapper: postComponentStyle.rateWrapper,
     rateLabel: postComponentStyle.rateLabel,

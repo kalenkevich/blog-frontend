@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Button from '../common/button';
 import { getFormattedDate } from '../../services/Formatter';
 import CommentListComponentStyle from './CommentListComponentStyle';
+import withAuthorization from '../../hocs/withAuthorization';
 
 const CommentListComponent = (props) => {
   const {
@@ -12,7 +13,10 @@ const CommentListComponent = (props) => {
     comments,
     onCommentClick,
     className,
+    authorizedUser,
+    onDelete,
   } = props;
+  const onDeleteButtonClick = ({ id }) => onDelete(id);
 
   return (
     <div className={`${classes.root} ${className}`}>
@@ -22,7 +26,23 @@ const CommentListComponent = (props) => {
           onClick={() => onCommentClick(comment)}
           className={classes.commentItem}
         >
-          <p className={classes.content}>{comment.content}</p>
+          <div className={classes.contentWrapper}>
+            <p className={classes.content}>
+              {comment.content}
+            </p>
+            {authorizedUser.id === comment.author.id
+              ? <Button
+                onClick={(event) => {
+                  event.stopPropagation();
+
+                  onDeleteButtonClick(comment);
+                }}>
+                  Delete
+              </Button>
+              : null
+            }
+          </div>
+
           <div className={classes.footer}>
             <div className={classes.createdUserPanel}>
               <span>Posted by</span>
@@ -46,6 +66,9 @@ CommentListComponent.propTypes = {
   className: PropTypes.string,
   comments: PropTypes.array,
   onCommentClick: PropTypes.func,
+  authorizedUser: PropTypes.object,
+  onUpdate: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
-export default withStyles(CommentListComponentStyle)(CommentListComponent);
+export default withAuthorization(withStyles(CommentListComponentStyle)(CommentListComponent));

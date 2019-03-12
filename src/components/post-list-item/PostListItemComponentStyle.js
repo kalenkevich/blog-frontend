@@ -14,10 +14,12 @@ export default theme => ({
   contentPreview: {
     whiteSpace: 'pre-line',
     marginBottom: '10px',
+    width: '100%',
   },
   content: {
     whiteSpace: 'pre-line',
     marginBottom: '10px',
+    width: '100%',
   },
   footer: {
     display: 'flex',

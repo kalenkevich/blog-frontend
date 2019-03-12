@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
 import PostFragment, { PostPreviewFragment } from '../fragments/postFragment';
-import CommentFragment from '../fragments/commnetFragment';
 import BackendGraphQLConnector from './BackendGraphQLConnector';
 
 export default class PostService {
@@ -83,48 +82,51 @@ export default class PostService {
   }
 
   static async addComment(postId, comment) {
-    const { addComment } = await BackendGraphQLConnector.mutate({
+    const { addComment: updatedPost } = await BackendGraphQLConnector.mutate({
       variables: { postId: parseInt(postId, 10), comment },
       mutation: gql`
         mutation AddComment($postId: Float!, $comment: CommentInput!) {
           addComment(postId: $postId, comment: $comment) {
-            code
+            ...PostFragment
           }
         }
+        ${PostFragment}
       `,
     });
 
-    return addComment;
+    return updatedPost;
   }
 
   static async updateComment(comment) {
-    const { updateComment } = await BackendGraphQLConnector.mutate({
+    const { updateComment: updatedPost } = await BackendGraphQLConnector.mutate({
       variables: { comment },
       mutation: gql`
         mutation UpdateComment($comment: CommentInput!) {
           updateComment(comment: $comment) {
-            code
+            ...PostFragment
           }
         }
+        ${PostFragment}
       `,
     });
 
-    return updateComment;
+    return updatedPost;
   }
 
   static async deleteComment(commentId) {
-    const { updateComment } = await BackendGraphQLConnector.mutate({
+    const { deleteComment: updatedPost } = await BackendGraphQLConnector.mutate({
       variables: { commentId: parseInt(commentId, 10) },
       mutation: gql`
         mutation DeleteComment($commentId: Float!) {
           deleteComment(commentId: $commentId) {
-            code
+            ...PostFragment
           }
         }
+        ${PostFragment}
       `,
     });
 
-    return updateComment;
+    return updatedPost;
   }
 
   static searchPosts(searchQuery, page = 0) {
