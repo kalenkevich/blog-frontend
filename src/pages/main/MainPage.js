@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
+import { withRouter } from 'react-router-dom';
 import Posts from '../../components/post-list';
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
@@ -8,14 +9,14 @@ import PostService from '../../services/PostService';
 import MainPageStyle from './MainPageStyle';
 
 const MainPage = (props) => {
-  const { classes } = props;
+  const { classes, history } = props;
   const {
     posts,
     fetchMore,
     isLoading,
     forSearchInput,
     forSearchButton,
-  } = forPosts();
+  } = forPosts(history);
 
   return (
     <div className={classes.mainPageContainer}>
@@ -32,19 +33,29 @@ const MainPage = (props) => {
   );
 };
 
-export const forPosts = () => {
+export const forPosts = (history) => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(0);
   const [isLoading, setLoadingState] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(new URLSearchParams(history.location.search).get('query'));
 
   const fetchMore = () => setPage(page + 1);
   const fetchPosts = async () => {
     setLoadingState(true);
 
-    const fetchedPosts = searchQuery ? await PostService.searchPosts(searchQuery, page) : await PostService.getPosts(page);
+    if (searchQuery) {
+      history.push({
+        pathname: history.location.pathname,
+        search: `?query=${searchQuery}`,
+      });
+      const foundedPosts = await PostService.searchPosts(searchQuery, page);
 
-    setPosts(fetchedPosts);
+      setPosts(foundedPosts);
+    } else {
+      const newPosts = await PostService.getPosts(page);
+
+      setPosts(newPosts);
+    }
 
     setLoadingState(false);
   };
@@ -67,8 +78,13 @@ export const forPosts = () => {
   };
 };
 
-MainPage.propTypes = {
-  classes: PropTypes.object.isRequired,
+export const setSearchQuery = (searchQuery) => {
+  window.location.query = searchQuery;
 };
 
-export default withStyles(MainPageStyle)(MainPage);
+MainPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object,
+};
+
+export default withRouter(withStyles(MainPageStyle)(MainPage));

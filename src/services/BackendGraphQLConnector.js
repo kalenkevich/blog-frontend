@@ -6,7 +6,7 @@ import NotificationService from './NotificationService';
 const defaultClientConfig = {
   uri: `${settings.Backend.Url}/graphql`,
   cache: new InMemoryCache({
-    addTypename: false,
+    addTypename: true,
   }),
   credentials: 'include',
 };

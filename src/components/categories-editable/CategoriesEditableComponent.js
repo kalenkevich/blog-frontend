@@ -33,7 +33,7 @@ const CategoriesEditableComponent = (props) => {
   return (
     <div className={`${classes.root} ${className}`}>
       {(categories || []).map(category => (
-        <div className={classes.category} key={category.id}>
+        <div className={classes.category} key={category.value}>
           <EditableLabel
             className={classes.editCategory}
             value={category.value}

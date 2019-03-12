@@ -7,6 +7,7 @@ export default theme => ({
     outline: 'none',
     width: '300px',
     padding: '5px',
+    paddingTop: '4px',
     fontSize: '14px',
     boxSizing: 'border-box',
   },

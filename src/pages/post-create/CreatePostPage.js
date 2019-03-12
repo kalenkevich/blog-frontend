@@ -19,6 +19,11 @@ const CreatePostPage = (props) => {
 
     history.push(`/post/${post.id}`);
   };
+  const getMoreCategories = async (query) => {
+    const fetchedCategories = await PostService.fetchCategories(query);
+
+    setCategories(fetchedCategories);
+  };
 
   return (
     <div className={classes.form}>
@@ -38,6 +43,7 @@ const CreatePostPage = (props) => {
         className={classes.formField}
         categories={categories}
         onChange={setCategories}
+        getMoreCategories={getMoreCategories}
       />
       <div className={`${classes.formField} ${classes.actionButtonPanel}`}>
         <Button className={classes.actionButton}>

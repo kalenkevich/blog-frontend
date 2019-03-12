@@ -6,7 +6,7 @@ export const PostPage = loadable(
   () => import(/* webpackChunkName: "PostPage" */ './pages/post'),
 );
 export const CreatePostPage = loadable(
-  () => import(/* webpackChunkName: "UserProfilePage" */ './pages/create-post'),
+  () => import(/* webpackChunkName: "UserProfilePage" */ './pages/post-create'),
 );
 export const PostsPage = loadable(
   () => import(/* webpackChunkName: "MainPage" */ './pages/main'),
