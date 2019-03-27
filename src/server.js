@@ -7,7 +7,7 @@ import { StaticRouter } from 'react-router-dom';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import { renderRoutes, matchRoutes } from 'react-router-config';
 import routes from './routes';
-import Application from './application';
+import Application from './application/ApplicationComponent';
 
 const statsFile = path.resolve(__dirname, '../dist/loadable-stats.json');
 const app = express();

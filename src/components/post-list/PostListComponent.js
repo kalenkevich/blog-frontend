@@ -9,10 +9,17 @@ import PostListComponentStyle from './PostListComponentStyle';
 
 const PostList = (props) => {
   const {
+    classes,
     posts,
     className,
     onScrolledToEnd = () => {},
   } = props;
+
+  if (!posts || posts.length === 0) {
+    return (
+      <div className={classes.emptyPlaceholder}>No any posts :(</div>
+    );
+  }
 
   return (
     <InfinityScroll className={`${className}`} onScrolledToEnd={onScrolledToEnd}>

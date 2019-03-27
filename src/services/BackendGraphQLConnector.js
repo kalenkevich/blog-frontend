@@ -1,3 +1,4 @@
+import fetch from 'unfetch';
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import settings from '../../config/settings';
@@ -9,6 +10,7 @@ const defaultClientConfig = {
     addTypename: true,
   }),
   credentials: 'include',
+  fetch,
 };
 
 class ApolloClientWrapper {

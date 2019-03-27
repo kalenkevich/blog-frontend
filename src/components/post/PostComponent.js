@@ -38,11 +38,13 @@ const PostComponent = (props) => {
             <span>Created by</span>
             <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>{post.author.name}</Link>
           </div>
-          <div className={classes.rateWrapper}>
-            <Button className={classes.rateActionButton}>Up</Button>
-            <div className={classes.rateLabel}>{post.rate}</div>
-            <Button className={classes.rateActionButton}>Down</Button>
-          </div>
+          {authorizedUser ? (
+            <div className={classes.rateWrapper}>
+              <Button className={classes.rateActionButton}>Up</Button>
+              <div className={classes.rateLabel}>{post.rate}</div>
+              <Button className={classes.rateActionButton}>Down</Button>
+            </div>
+          ) : null}
           <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>
         </div>
       </div>

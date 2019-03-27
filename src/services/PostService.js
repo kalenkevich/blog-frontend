@@ -4,7 +4,7 @@ import CategoryFragment from '../fragments/categoryFragment';
 import BackendGraphQLConnector from './BackendGraphQLConnector';
 
 export default class PostService {
-  static async getPosts(page = 0) {
+  static async getPosts() {
     const { getAllPosts: posts } = await BackendGraphQLConnector.query({
       query: gql`
         query GetAllPosts {
@@ -146,7 +146,7 @@ export default class PostService {
     return categories;
   }
 
-  static async searchPosts(query, page = 0) {
+  static async searchPosts(query) {
     const { searchPosts: categories } = await BackendGraphQLConnector.query({
       variables: { query },
       query: gql`
@@ -160,5 +160,21 @@ export default class PostService {
     });
 
     return categories;
+  }
+
+  static async ratePost(postId, rateAction) {
+    const { ratePost: updatedPost } = await BackendGraphQLConnector.query({
+      variables: { postId, rateAction },
+      query: gql`
+        query RatePost($postId: Float!, $rateAction: String!) {
+          ratePost(postId: $postId, rateAction: $rateAction) {
+            ...PostPreviewFragment
+          }
+        }
+        ${PostPreviewFragment}
+      `,
+    });
+
+    return updatedPost;
   }
 }

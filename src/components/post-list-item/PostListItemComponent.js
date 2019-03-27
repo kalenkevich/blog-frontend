@@ -6,12 +6,14 @@ import Button from '../common/button';
 import Categories from '../categories';
 import PostListItemComponentStyle from './PostListItemComponentStyle';
 import { getFormattedDate } from '../../services/Formatter';
+import withAuthorization from '../../hocs/withAuthorization';
 
 const PostListItem = (props) => {
   const {
     classes,
     post,
     onClick = () => {},
+    authorizedUser,
   } = props;
 
   return (
@@ -29,11 +31,13 @@ const PostListItem = (props) => {
             <span>Posted by</span>
             <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>{post.author.name}</Link>
           </div>
-          <div className={classes.rateWrapper}>
-            <Button className={classes.rateActionButton}>Up</Button>
-            <div className={classes.rateLabel}>{post.rate}</div>
-            <Button className={classes.rateActionButton}>Down</Button>
-          </div>
+          {authorizedUser ? (
+            <div className={classes.rateWrapper}>
+              <Button className={classes.rateActionButton}>Up</Button>
+              <div className={classes.rateLabel}>{post.rate}</div>
+              <Button className={classes.rateActionButton}>Down</Button>
+            </div>
+          ) : null}
           <div className={classes.commentsCount}>{post.commentsCount} comments</div>
           <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>
         </div>
@@ -46,8 +50,9 @@ const PostListItem = (props) => {
 PostListItem.propTypes = {
   classes: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
+  authorizedUser: PropTypes.object,
   onClick: PropTypes.func,
   onScrolledToEnd: PropTypes.func,
 };
 
-export default withStyles(PostListItemComponentStyle)(PostListItem);
+export default withAuthorization(withStyles(PostListItemComponentStyle)(PostListItem));

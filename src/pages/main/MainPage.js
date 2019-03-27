@@ -14,6 +14,7 @@ const MainPage = (props) => {
     posts,
     fetchMore,
     isLoading,
+    onPostRate,
     forSearchInput,
     forSearchButton,
   } = forPosts(history);
@@ -27,6 +28,7 @@ const MainPage = (props) => {
       <Posts
         posts={posts}
         onScrolledToEnd={fetchMore}
+        onPostRate={onPostRate}
         isLoading={isLoading}
       />
     </div>
@@ -60,6 +62,10 @@ export const forPosts = (history) => {
     setLoadingState(false);
   };
 
+  const onPostRate = async (post, rateAction) => {
+    await PostService.ratePost(post, rateAction);
+  };
+
   useEffect(() => {
     fetchPosts();
   }, [page]);
@@ -68,8 +74,9 @@ export const forPosts = (history) => {
     posts,
     fetchMore,
     isLoading,
+    onPostRate,
     forSearchInput: {
-      value: searchQuery,
+      value: searchQuery || '',
       onChange: event => setSearchQuery(event.target.value),
     },
     forSearchButton: {

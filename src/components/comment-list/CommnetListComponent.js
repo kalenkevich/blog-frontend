@@ -11,7 +11,7 @@ const CommentListComponent = (props) => {
   const {
     classes,
     comments,
-    onCommentClick,
+    onCommentClick = () => {},
     className,
     authorizedUser,
     onDelete,
@@ -30,7 +30,7 @@ const CommentListComponent = (props) => {
             <p className={classes.content}>
               {comment.content}
             </p>
-            {authorizedUser.id === comment.author.id
+            {authorizedUser && authorizedUser.id === comment.author.id
               ? <Button
                 onClick={(event) => {
                   event.stopPropagation();
@@ -48,11 +48,13 @@ const CommentListComponent = (props) => {
               <span>Posted by</span>
               <Link className={classes.createdUserName} to={`/user/${comment.author.id}`}>{comment.author.name}</Link>
             </div>
-            <div className={classes.rateWrapper}>
-              <Button className={classes.rateActionButton}>Up</Button>
-              <div className={classes.rateLabel}>{comment.rate}</div>
-              <Button className={classes.rateActionButton}>Down</Button>
-            </div>
+            {authorizedUser ? (
+              <div className={classes.rateWrapper}>
+                <Button className={classes.rateActionButton}>Up</Button>
+                <div className={classes.rateLabel}>{comment.rate}</div>
+                <Button className={classes.rateActionButton}>Down</Button>
+              </div>
+            ) : null}
             <div className={classes.creationDate}>{getFormattedDate(comment.creationDate)}</div>
           </div>
         </div>

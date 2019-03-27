@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyle from 'react-jss';
 
-export const CommentsComponentLoading = theme => ({
+export const CommentsComponentLoadingStyle = theme => ({
   root: {
     margin: '10px 0',
     width: '100%',
@@ -22,4 +22,4 @@ CommentsComponent.propTypes = {
   post: PropTypes.object,
 };
 
-export default withStyle(CommentsComponentLoading)(CommentsComponent);
+export default withStyle(CommentsComponentLoadingStyle)(CommentsComponent);

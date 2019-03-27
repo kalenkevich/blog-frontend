@@ -21,7 +21,7 @@ const HeaderComponent = (props) => {
     ResultPanel = (
       <div className={classes.actionPanel}>
         <Button className={classes.actionPanelButton}>
-          Hello {authorizedUser.name}
+          Hello, {authorizedUser.name}
         </Button>
         <Button className={classes.actionPanelButton}
           onClick={() => history.push('/post/create')}

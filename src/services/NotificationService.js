@@ -22,7 +22,7 @@ export default class NotificationService {
     return this.showNotification(message, NOTIFICATION_TYPES.INFO);
   }
 
-  static showNotification(message, type) {
+  static showNotification() {
 
   }
 
