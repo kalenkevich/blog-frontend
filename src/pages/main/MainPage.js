@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
@@ -14,13 +14,13 @@ const MainPage = (props) => {
     posts,
     fetchMore,
     isLoading,
-    onPostRate,
+    onRate,
     forSearchInput,
     forSearchButton,
   } = forPosts(history);
 
   return (
-    <div className={classes.mainPageContainer}>
+    <Fragment>
       <div className={classes.searchPanel}>
         <Input className={classes.searchPanelInput} {...forSearchInput}/>
         <Button className={classes.searchPanelButton} {...forSearchButton}>Search</Button>
@@ -28,10 +28,10 @@ const MainPage = (props) => {
       <Posts
         posts={posts}
         onScrolledToEnd={fetchMore}
-        onPostRate={onPostRate}
+        onRate={onRate}
         isLoading={isLoading}
       />
-    </div>
+    </Fragment>
   );
 };
 
@@ -62,8 +62,20 @@ export const forPosts = (history) => {
     setLoadingState(false);
   };
 
-  const onPostRate = async (post, rateAction) => {
-    await PostService.ratePost(post, rateAction);
+  const onRate = async (post, rateAction) => {
+    await PostService.ratePost(post.id, rateAction);
+    const updatedPosts = (posts || []).map((p) => {
+      if (p.id === post.id) {
+        return {
+          ...p,
+          rate: p.rate + (rateAction === 'UP' ? 1 : -1),
+        };
+      }
+
+      return p;
+    });
+
+    setPosts(updatedPosts);
   };
 
   useEffect(() => {
@@ -74,7 +86,7 @@ export const forPosts = (history) => {
     posts,
     fetchMore,
     isLoading,
-    onPostRate,
+    onRate,
     forSearchInput: {
       value: searchQuery || '',
       onChange: event => setSearchQuery(event.target.value),

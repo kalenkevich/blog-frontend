@@ -7,6 +7,7 @@ export default (theme) => {
     form: {
       ...signInPageStyle.form,
       width: '100%',
+      maxWidth: 'initial',
     },
     formField: {
       ...signInPageStyle.formField,
@@ -20,7 +21,13 @@ export default (theme) => {
       fontSize: '24px',
       height: '42px',
     },
+    categories: {
+      borderTop: `1px solid ${theme.brandPrimaryColor}`,
+      paddingTop: '10px',
+    },
     actionButtonPanel: {
+      borderTop: `1px solid ${theme.brandPrimaryColor}`,
+      paddingTop: '10px',
       justifyContent: 'flex-end',
     },
   };

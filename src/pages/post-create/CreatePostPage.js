@@ -40,7 +40,7 @@ const CreatePostPage = (props) => {
         onChange={setContent}
       />
       <EditableCategories
-        className={classes.formField}
+        className={`${classes.formField} ${classes.categories}`}
         categories={categories}
         onChange={setCategories}
         getMoreCategories={getMoreCategories}

@@ -16,7 +16,7 @@ const PostList = (props) => {
     onRate,
   } = props;
 
-  if (!posts || posts.length === 0) {
+  if (posts.length === 0) {
     return (
       <div className={classes.emptyPlaceholder}>No any posts :(</div>
     );

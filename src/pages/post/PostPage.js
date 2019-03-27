@@ -56,6 +56,15 @@ export const getForPost = (id) => {
     setLoadingState(false);
   };
 
+  const ratePost = async (rateAction) => {
+    await PostService.ratePost(post.id, rateAction);
+
+    setPost({
+      ...post,
+      rate: post.rate + (rateAction === 'UP' ? 1 : -1),
+    });
+  };
+
   useEffect(() => {
     fetchPost(id);
   }, []);
@@ -63,6 +72,7 @@ export const getForPost = (id) => {
   return {
     post,
     isLoading,
+    onRate: ratePost,
     onAddComment: addComment,
     onUpdateComment: updateComment,
     onDeleteComment: deleteComment,

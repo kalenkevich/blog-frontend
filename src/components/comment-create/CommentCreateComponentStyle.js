@@ -9,12 +9,14 @@ export default theme => ({
     height: '100px',
   },
   actionPanel: {
+    display: 'flex',
+    justifyContent: 'flex-end',
     margin: '5px 0',
   },
   actionPanelButton: {
-    marginLeft: '10px',
-    '&:first-of-type': {
-      marginLeft: '0',
+    marginRight: '10px',
+    '&:last-of-type': {
+      marginRight: '0',
     },
   },
 });

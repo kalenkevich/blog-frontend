@@ -23,7 +23,9 @@ const HeaderComponent = (props) => {
   if (authorizedUser) {
     ResultPanel = (
       <div className={classes.actionPanel}>
-        <Button className={classes.actionPanelButton}>
+        <Button className={classes.actionPanelButton}
+          onClick={() => history.push(`/user/${authorizedUser.id}`)}
+        >
           { isMobile ? <FontAwesomeIcon icon='user'/> : `Hello, ${authorizedUser.name}` }
         </Button>
         <Button className={classes.actionPanelButton}

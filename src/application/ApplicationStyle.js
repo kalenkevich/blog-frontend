@@ -21,6 +21,9 @@ export default {
     width: '100%',
   },
   application: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
     maxWidth: '1200px',
     width: '100%',
   },

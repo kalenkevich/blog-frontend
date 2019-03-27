@@ -163,15 +163,15 @@ export default class PostService {
   }
 
   static async ratePost(postId, rateAction) {
-    const { ratePost: updatedPost } = await BackendGraphQLConnector.query({
-      variables: { postId, rateAction },
-      query: gql`
-        query RatePost($postId: Float!, $rateAction: String!) {
+    const { ratePost: updatedPost } = await BackendGraphQLConnector.mutate({
+      variables: { postId: parseInt(postId, 10), rateAction },
+      mutation: gql`
+        mutation RatePost($postId: Float!, $rateAction: String!) {
           ratePost(postId: $postId, rateAction: $rateAction) {
-            ...PostPreviewFragment
+            ...PostFragment
           }
         }
-        ${PostPreviewFragment}
+        ${PostFragment}
       `,
     });
 

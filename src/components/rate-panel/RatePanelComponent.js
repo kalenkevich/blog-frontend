@@ -11,19 +11,17 @@ export const RATE_ACTIONS = {
 };
 
 export const RatePanelComponent = ({
-  classes, rate, onRate, canRate,
+  classes, rate, onRate,
 }) => (
   <div className={classes.rateWrapper}>
     <Button className={classes.rateActionButton}
       onClick={() => onRate(RATE_ACTIONS.UP)}
-      disabled={!canRate}
     >
       <FontAwesomeIcon icon={['far', 'thumbs-up']}/>
     </Button>
     <div className={classes.rateLabel}>{rate}</div>
     <Button className={classes.rateActionButton}
       onClick={() => onRate(RATE_ACTIONS.DOWN)}
-      disabled={!canRate}
     >
       <FontAwesomeIcon icon={['far', 'thumbs-down']}/>
     </Button>
@@ -34,7 +32,6 @@ RatePanelComponent.propTypes = {
   classes: PropTypes.object,
   rate: PropTypes.number,
   onRate: PropTypes.func,
-  canRate: PropTypes.bool,
 };
 
 export default withStyles(RatePanelComponentStyles)(RatePanelComponent);
