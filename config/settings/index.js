@@ -24,7 +24,7 @@ export const getGlobalSettings = environment => Object.keys(environment || {}).r
   return currentSettings;
 }, {});
 
-export const Environment = process.env.NODE_ENV;
+export const Environment = process.env.ENVIRONMENT;
 export const EnvironmentSettings = getEnvironmentSettings(Environment);
 export const GlobalSettings = getGlobalSettings(process.env);
 export const ResultSettings = _.merge(
