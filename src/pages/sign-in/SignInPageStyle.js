@@ -5,10 +5,12 @@ export default theme => ({
     justifyContent: 'center',
   },
   form: {
-    width: '600px',
+    maxWidth: '600px',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     padding: '10px',
+    boxSizing: 'border-box',
     border: `1px solid ${theme.brandPrimaryColor}`,
     borderRadius: theme.borderRadius,
   },

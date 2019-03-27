@@ -29,32 +29,25 @@ export default theme => ({
     alignItems: 'center',
   },
   createdUserName: {
-    marginLeft: '5px',
-    textDecoration: 'none',
-    color: theme.titleColor,
-    '&:hover': {
-      color: theme.titleHoverColor,
-    },
-  },
-  rateWrapper: {
     width: '30%',
+    textDecoration: 'none',
+    color: theme.authorColor,
+  },
+  commentsCount: {
+    width: '20%',
     display: 'flex',
     alignItems: 'center',
   },
-  rateLabel: {
-    padding: '0 10px',
+  commentLabelWrapper: {
+    marginLeft: '5px',
   },
-  rateActionButton: {},
-  commentsCount: {
-    width: '20%',
+  commentIcon: {
+    color: '#ADB5BD',
   },
   creationDate: {
     width: '20%',
     display: 'flex',
     justifyContent: 'flex-end',
-  },
-  createdUserPanel: {
-    width: '30%',
   },
   categories: {
     marginTop: '10px',

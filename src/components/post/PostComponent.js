@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyle from 'react-jss';
 import { Link } from 'react-router-dom';
-import Button from '../common/button';
 import withLoading from '../../hocs/withLoading';
 import PostComponentLoading from './PostComponentLoading';
 import PostComponentStyle from './PostComponentStyle';
@@ -10,6 +9,7 @@ import Categories from '../categories';
 import CommentList from '../comment-list';
 import CommentCreate from '../comment-create';
 import withAuthorization from '../../hocs/withAuthorization';
+import RatePanel from '../rate-panel';
 import { getFormattedDate } from '../../services/Formatter';
 
 const PostComponent = (props) => {
@@ -20,6 +20,7 @@ const PostComponent = (props) => {
     onAddComment,
     onUpdateComment,
     onDeleteComment,
+    onRate,
   } = props;
 
   if (!post) {
@@ -34,17 +35,8 @@ const PostComponent = (props) => {
           {post.content}
         </p>
         <div className={classes.footer}>
-          <div className={classes.createdUserPanel}>
-            <span>Created by</span>
-            <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>{post.author.name}</Link>
-          </div>
-          {authorizedUser ? (
-            <div className={classes.rateWrapper}>
-              <Button className={classes.rateActionButton}>Up</Button>
-              <div className={classes.rateLabel}>{post.rate}</div>
-              <Button className={classes.rateActionButton}>Down</Button>
-            </div>
-          ) : null}
+          <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>@{post.author.name}</Link>
+          {authorizedUser ? <RatePanel rate={post.rate} onRate={onRate}/> : null}
           <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>
         </div>
       </div>
@@ -67,6 +59,7 @@ PostComponent.propTypes = {
   onAddComment: PropTypes.func,
   onUpdateComment: PropTypes.func,
   onDeleteComment: PropTypes.func,
+  onRate: PropTypes.func,
 };
 
 export const StyledPostComponent = withStyle(PostComponentStyle)(PostComponent);

@@ -13,6 +13,7 @@ const PostList = (props) => {
     posts,
     className,
     onScrolledToEnd = () => {},
+    onRate,
   } = props;
 
   if (!posts || posts.length === 0) {
@@ -27,6 +28,7 @@ const PostList = (props) => {
         <PostListItem
           key={post.id}
           post={post}
+          onRate={rateAction => onRate(post, rateAction)}
         />
       ))}
     </InfinityScroll>
@@ -39,6 +41,7 @@ PostList.propTypes = {
   posts: PropTypes.array.isRequired,
   onPostClick: PropTypes.func,
   onScrolledToEnd: PropTypes.func,
+  onRate: PropTypes.func,
 };
 
 export const StyledPostPageList = withStyles(PostListComponentStyle)(PostList);

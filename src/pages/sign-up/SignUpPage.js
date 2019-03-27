@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
 import Label from '../../components/common/label';
+import { getForErrorLabel, getForInput } from '../sign-in/SignInPage';
 import SignUpPageStyle from './SignUpPageStyle';
 import withAuthorization from '../../hocs/withAuthorization';
 
@@ -26,7 +27,7 @@ const SignUpPage = (props) => {
   return (
     <div className={classes.page}>
       <div className={classes.form}>
-        <div className={classes.formField}>Sign Un Title</div>
+        <div className={classes.formField}>Sign Up</div>
         <Label className={classes.formLabel} {...forErrorLabel}/>
         <Input className={classes.formField} {...forNameInput}/>
         <Input className={classes.formField} {...forEmailInput}/>
@@ -47,26 +48,6 @@ const SignUpPage = (props) => {
       </div>
     </div>
   );
-};
-
-export const getForInput = (props) => {
-  const [value, setValue] = useState('');
-
-  return {
-    ...props,
-    value,
-    onChange: event => setValue(event.target.value),
-  };
-};
-
-export const getForErrorLabel = () => {
-  const [signUpError, setSignUpError] = useState(null);
-
-  return {
-    type: 'error',
-    value: signUpError,
-    setSignUpError,
-  };
 };
 
 SignUpPage.propTypes = {

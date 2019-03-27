@@ -1,3 +1,19 @@
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faPlus,
+  faUser,
+  faSignOutAlt,
+  faCommentAlt,
+} from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
+
+library.add(faPlus);
+library.add(faUser);
+library.add(faCommentAlt);
+library.add(faSignOutAlt);
+library.add(faThumbsUp);
+library.add(faThumbsDown);
+
 export default {
   applicationWrapper: {
     display: 'flex',
@@ -5,7 +21,8 @@ export default {
     width: '100%',
   },
   application: {
-    width: '1200px',
+    maxWidth: '1200px',
+    width: '100%',
   },
   '@keyframes blink': {
     '0%': {

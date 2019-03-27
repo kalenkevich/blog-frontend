@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyle from 'react-jss';
+import MobileContext from '../../../context/MobileContext';
 
 export const style = theme => ({
   root: {
-    height: '32px',
+    minHeight: '32px',
     border: `1px solid ${theme.brandPrimaryColor}`,
     borderRadius: theme.borderRadius,
     backgroundColor: 'transparent',
@@ -16,6 +17,13 @@ export const style = theme => ({
     '&:hover': {
       backgroundColor: theme.brandPrimaryColor,
     },
+    '&:disabled': {
+      cursor: 'default',
+      backgroundColor: theme.brandPrimaryColor,
+    },
+    '&.mobile': {
+      minWidth: 'initial',
+    },
   },
 });
 
@@ -25,11 +33,14 @@ const ButtonComponent = (props) => {
     children,
     onClick,
     className = '',
+    disabled = false,
   } = props;
+  const { isMobile } = useContext(MobileContext);
 
   return (
     <button
-      className={`${classes.root} ${className}`}
+      className={`${classes.root} ${className} ${isMobile ? 'mobile' : ''}`}
+      disabled={disabled}
       onClick={onClick}
     >
       {children}
@@ -42,6 +53,7 @@ ButtonComponent.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default withStyle(style)(ButtonComponent);

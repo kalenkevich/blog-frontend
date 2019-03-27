@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import Button from '../common/button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Categories from '../categories';
 import PostListItemComponentStyle from './PostListItemComponentStyle';
 import { getFormattedDate } from '../../services/Formatter';
 import withAuthorization from '../../hocs/withAuthorization';
+import MobileContext from '../../context/MobileContext';
+import RatePanel from '../rate-panel';
 
 const PostListItem = (props) => {
   const {
@@ -14,7 +16,9 @@ const PostListItem = (props) => {
     post,
     onClick = () => {},
     authorizedUser,
+    onRate,
   } = props;
+  const { isMobile } = useContext(MobileContext);
 
   return (
     <>
@@ -27,18 +31,14 @@ const PostListItem = (props) => {
         </Link>
         <div className={classes.contentPreview}>{post.contentPreview}</div>
         <div className={classes.footer}>
-          <div className={classes.createdUserPanel}>
-            <span>Posted by</span>
-            <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>{post.author.name}</Link>
+          <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>@{post.author.name}</Link>
+          { authorizedUser ? <RatePanel rate={post.rate} onRate={onRate}/> : null}
+          <div className={classes.commentsCount}>
+            {post.commentsCount}
+            <span className={classes.commentLabelWrapper}>
+              { isMobile ? <FontAwesomeIcon className={classes.commentIcon} icon='comment-alt'/> : 'Comments' }
+            </span>
           </div>
-          {authorizedUser ? (
-            <div className={classes.rateWrapper}>
-              <Button className={classes.rateActionButton}>Up</Button>
-              <div className={classes.rateLabel}>{post.rate}</div>
-              <Button className={classes.rateActionButton}>Down</Button>
-            </div>
-          ) : null}
-          <div className={classes.commentsCount}>{post.commentsCount} comments</div>
           <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>
         </div>
       </div>
@@ -53,6 +53,7 @@ PostListItem.propTypes = {
   authorizedUser: PropTypes.object,
   onClick: PropTypes.func,
   onScrolledToEnd: PropTypes.func,
+  onRate: PropTypes.func,
 };
 
 export default withAuthorization(withStyles(PostListItemComponentStyle)(PostListItem));

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthorizationConsumer } from '../context/autorization';
+import { AuthorizationConsumer } from '../context/AutorizationContext';
 
 // eslint-disable-next-line react/display-name
 export default Component => props => (

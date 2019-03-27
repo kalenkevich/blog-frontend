@@ -6,6 +6,7 @@ import Button from '../common/button';
 import { getFormattedDate } from '../../services/Formatter';
 import CommentListComponentStyle from './CommentListComponentStyle';
 import withAuthorization from '../../hocs/withAuthorization';
+import RatePanel from '../rate-panel';
 
 const CommentListComponent = (props) => {
   const {
@@ -15,6 +16,7 @@ const CommentListComponent = (props) => {
     className,
     authorizedUser,
     onDelete,
+    onRate,
   } = props;
   const onDeleteButtonClick = ({ id }) => onDelete(id);
 
@@ -44,17 +46,8 @@ const CommentListComponent = (props) => {
           </div>
 
           <div className={classes.footer}>
-            <div className={classes.createdUserPanel}>
-              <span>Posted by</span>
-              <Link className={classes.createdUserName} to={`/user/${comment.author.id}`}>{comment.author.name}</Link>
-            </div>
-            {authorizedUser ? (
-              <div className={classes.rateWrapper}>
-                <Button className={classes.rateActionButton}>Up</Button>
-                <div className={classes.rateLabel}>{comment.rate}</div>
-                <Button className={classes.rateActionButton}>Down</Button>
-              </div>
-            ) : null}
+            <Link className={classes.createdUserName} to={`/user/${comment.author.id}`}>@{comment.author.name}</Link>
+            {authorizedUser ? <RatePanel rate={comment.rate} onRate={rateAction => onRate(comment, rateAction)}/> : null}
             <div className={classes.creationDate}>{getFormattedDate(comment.creationDate)}</div>
           </div>
         </div>
@@ -71,6 +64,7 @@ CommentListComponent.propTypes = {
   authorizedUser: PropTypes.object,
   onUpdate: PropTypes.func,
   onDelete: PropTypes.func,
+  onRate: PropTypes.func,
 };
 
 export default withAuthorization(withStyles(CommentListComponentStyle)(CommentListComponent));

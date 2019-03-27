@@ -4,22 +4,32 @@ import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
+import Label from '../../components/common/label';
 import SignInPageStyle from './SignInPageStyle';
 import withAuthorization from '../../hocs/withAuthorization';
 
 const SignInPage = (props) => {
   const { classes, history, signIn } = props;
+  const forErrorLabel = getForErrorLabel();
   const forEmailInput = getForInput({ placeholder: 'Email' });
   const forPasswordInput = getForInput({ placeholder: 'Password', type: 'password' });
+  const trySignIn = async () => {
+    const [, error] = await signIn(forEmailInput.value, forPasswordInput.value);
+
+    if (error) {
+      forErrorLabel.setSignUpError(error.message);
+    }
+  };
 
   return (
     <div className={classes.page}>
       <div className={classes.form}>
-        <div className={classes.formField}>Sign In Title</div>
+        <div className={classes.formField}>Sign In</div>
+        <Label className={classes.formLabel} {...forErrorLabel}/>
         <Input className={classes.formField} {...forEmailInput}/>
         <Input className={classes.formField} {...forPasswordInput}/>
         <div className={classes.formField}>
-          <Button onClick={() => signIn(forEmailInput.value, forPasswordInput.value)}
+          <Button onClick={trySignIn}
             className={classes.actionButton}
           >
             Sign In
@@ -42,6 +52,16 @@ export const getForInput = (props) => {
     ...props,
     value,
     onChange: event => setValue(event.target.value),
+  };
+};
+
+export const getForErrorLabel = () => {
+  const [signUpError, setSignUpError] = useState(null);
+
+  return {
+    type: 'error',
+    value: signUpError,
+    setSignUpError,
   };
 };
 

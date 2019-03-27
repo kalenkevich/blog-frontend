@@ -108,3 +108,5 @@ AuthorizationComponent.propTypes = {
 };
 
 export const Authorization = withRouter(AuthorizationComponent);
+
+export default AuthorizationContext;

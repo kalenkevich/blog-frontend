@@ -23,16 +23,14 @@ export default (theme) => {
     },
     contentWrapper: {
       display: 'flex',
+      marginBottom: '10px',
     },
     content: {
       ...postComponentStyle.content,
       width: '100%',
     },
     footer: postComponentStyle.footer,
-    rateWrapper: postComponentStyle.rateWrapper,
-    rateLabel: postComponentStyle.rateLabel,
     creationDate: postComponentStyle.creationDate,
     createdUserName: postComponentStyle.createdUserName,
-    createdUserPanel: postComponentStyle.createdUserPanel,
   };
 };
