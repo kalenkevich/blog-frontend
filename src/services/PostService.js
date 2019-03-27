@@ -163,18 +163,18 @@ export default class PostService {
   }
 
   static async ratePost(postId, rateAction) {
-    const { ratePost: updatedPost } = await BackendGraphQLConnector.mutate({
+    const { ratePost: result } = await BackendGraphQLConnector.mutate({
       variables: { postId: parseInt(postId, 10), rateAction },
       mutation: gql`
         mutation RatePost($postId: Float!, $rateAction: String!) {
           ratePost(postId: $postId, rateAction: $rateAction) {
-            ...PostFragment
+            code
+            message
           }
         }
-        ${PostFragment}
       `,
     });
 
-    return updatedPost;
+    return result;
   }
 }
