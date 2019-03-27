@@ -21,6 +21,7 @@ const PostComponent = (props) => {
     onUpdateComment,
     onDeleteComment,
     onRate,
+    onCommentRate,
   } = props;
 
   if (!post) {
@@ -45,6 +46,7 @@ const PostComponent = (props) => {
       <CommentList
         className={classes.comments}
         comments={post.comments}
+        onRate={onCommentRate}
         onUpdate={onUpdateComment}
         onDelete={onDeleteComment}
       />
@@ -60,6 +62,7 @@ PostComponent.propTypes = {
   onUpdateComment: PropTypes.func,
   onDeleteComment: PropTypes.func,
   onRate: PropTypes.func,
+  onCommentRate: PropTypes.func,
 };
 
 export const StyledPostComponent = withStyle(PostComponentStyle)(PostComponent);

@@ -4,11 +4,15 @@ import {
   faUser,
   faSignOutAlt,
   faCommentAlt,
+  faTimes,
+  faPencilAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 
 library.add(faPlus);
 library.add(faUser);
+library.add(faTimes);
+library.add(faPencilAlt);
 library.add(faCommentAlt);
 library.add(faSignOutAlt);
 library.add(faThumbsUp);

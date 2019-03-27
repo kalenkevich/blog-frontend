@@ -39,21 +39,33 @@ export const getForPost = (id) => {
   };
 
   const updateComment = async (comment) => {
-    setLoadingState(true);
+    await PostService.updateComment(comment);
 
-    const updatedPost = await PostService.updateComment(comment);
+    const updatedComments = (post.comments || []).map(c => {
+      if (c.id === comment.id) {
+        return {
+          ...c,
+          content: comment.content,
+        };
+      }
 
-    setPost(updatedPost);
-    setLoadingState(false);
+      return c;
+    });
+
+    setPost({
+      ...post,
+      comments: updatedComments,
+    });
   };
 
-  const deleteComment = async (commentId) => {
-    setLoadingState(true);
+  const deleteComment = async (comment) => {
+    await PostService.deleteComment(comment.id);
+    const updatedComments = (post.comments || []).filter(c => c.id !== comment.id);
 
-    const updatedPost = await PostService.deleteComment(commentId);
-
-    setPost(updatedPost);
-    setLoadingState(false);
+    setPost({
+      ...post,
+      comments: updatedComments,
+    });
   };
 
   const ratePost = async (rateAction) => {
@@ -65,6 +77,26 @@ export const getForPost = (id) => {
     });
   };
 
+  const rateComment = async (comment, rateAction) => {
+    await PostService.rateComment(comment.id, rateAction);
+
+    const updatedPostComments = (post.comments || []).map((c) => {
+      if (c.id === comment.id) {
+        return {
+          ...c,
+          rate: c.rate + (rateAction === 'UP' ? 1 : -1),
+        };
+      }
+
+      return c;
+    });
+
+    setPost({
+      ...post,
+      comments: updatedPostComments,
+    });
+  };
+
   useEffect(() => {
     fetchPost(id);
   }, []);
@@ -73,6 +105,7 @@ export const getForPost = (id) => {
     post,
     isLoading,
     onRate: ratePost,
+    onCommentRate: rateComment,
     onAddComment: addComment,
     onUpdateComment: updateComment,
     onDeleteComment: deleteComment,

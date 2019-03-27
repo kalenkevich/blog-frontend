@@ -104,10 +104,10 @@ export default class PostService {
       mutation: gql`
         mutation UpdateComment($comment: CommentInput!) {
           updateComment(comment: $comment) {
-            ...PostFragment
+            code
+            message
           }
         }
-        ${PostFragment}
       `,
     });
 
@@ -120,10 +120,10 @@ export default class PostService {
       mutation: gql`
         mutation DeleteComment($commentId: Float!) {
           deleteComment(commentId: $commentId) {
-            ...PostFragment
+            code
+            message
           }
         }
-        ${PostFragment}
       `,
     });
 
@@ -168,6 +168,22 @@ export default class PostService {
       mutation: gql`
         mutation RatePost($postId: Float!, $rateAction: String!) {
           ratePost(postId: $postId, rateAction: $rateAction) {
+            code
+            message
+          }
+        }
+      `,
+    });
+
+    return result;
+  }
+
+  static async rateComment(commentId, rateAction) {
+    const { ratePost: result } = await BackendGraphQLConnector.mutate({
+      variables: { commentId: parseInt(commentId, 10), rateAction },
+      mutation: gql`
+        mutation RateComment($commentId: Float!, $rateAction: String!) {
+          rateComment(commentId: $commentId, rateAction: $rateAction) {
             code
             message
           }
