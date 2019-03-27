@@ -1,6 +1,6 @@
 export default {
   Backend: {
-    Url: 'http://localhost:9000',
+    Url: 'https://blog-backend-development.herokuapp.com',
   },
   App: {
     Name: 'Development',
