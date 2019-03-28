@@ -6,7 +6,7 @@ import Button from '../common/button';
 import CommentCreateComponentStyle from './CommentCreateComponentStyle';
 
 const CommentCreateComponent = (props) => {
-  const { classes, onAdd } = props;
+  const { classes, onAdd, className } = props;
   const [comment, setComment] = useState('');
   const onCancelClick = () => setComment('');
   const onSaveClick = () => {
@@ -20,7 +20,7 @@ const CommentCreateComponent = (props) => {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} ${className}`}>
       <TextArea
         className={classes.textArea}
         value={comment}
@@ -28,14 +28,15 @@ const CommentCreateComponent = (props) => {
         placeholder={'Type your comment here'}
       />
       <div className={classes.actionPanel}>
-        <Button className={classes.actionPanelButton} onClick={onCancelClick}>Cancel</Button>
         <Button className={classes.actionPanelButton} onClick={onSaveClick}>Save</Button>
+        <Button className={classes.actionPanelButton} onClick={onCancelClick}>Cancel</Button>
       </div>
     </div>
   );
 };
 
 CommentCreateComponent.propTypes = {
+  className: PropTypes.string,
   classes: PropTypes.object,
   onAdd: PropTypes.func,
 };

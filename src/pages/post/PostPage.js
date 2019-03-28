@@ -7,9 +7,9 @@ import PostService from '../../services/PostService';
 import PostPageStyle from './PostPageStyle';
 
 const PostPage = (props) => {
-  const { classes, match } = props;
+  const { classes, match, history } = props;
   const { postId } = match.params;
-  const forPost = getForPost(postId);
+  const forPost = getForPost(postId, history);
 
   return (
     <div className={classes.postPageContainer}>
@@ -18,9 +18,10 @@ const PostPage = (props) => {
   );
 };
 
-export const getForPost = (id) => {
+export const getForPost = (id, history) => {
   const [post, setPost] = useState(null);
   const [isLoading, setLoadingState] = useState(false);
+
   const fetchPost = async (postId) => {
     setLoadingState(true);
 
@@ -29,6 +30,31 @@ export const getForPost = (id) => {
     setPost(fetchedPost);
     setLoadingState(false);
   };
+
+  const updatePost = async ({ content, title, categories }) => {
+    setLoadingState(true);
+
+    const updatedPost = await PostService.updatePost({
+      id: post.id,
+      title,
+      content,
+      categories,
+    });
+
+    setPost(updatedPost);
+    setLoadingState(false);
+  };
+
+  const deletePost = async () => {
+    setLoadingState(true);
+
+    await PostService.deletePost(post.id);
+
+    setLoadingState(false);
+
+    history.push('/');
+  };
+
   const addComment = async (comment) => {
     setLoadingState(true);
 
@@ -97,6 +123,8 @@ export const getForPost = (id) => {
     });
   };
 
+  const getMoreCategories = query => PostService.fetchCategories(query);
+
   useEffect(() => {
     fetchPost(id);
   }, []);
@@ -104,6 +132,9 @@ export const getForPost = (id) => {
   return {
     post,
     isLoading,
+    getMoreCategories,
+    onUpdate: updatePost,
+    onDelete: deletePost,
     onRate: ratePost,
     onCommentRate: rateComment,
     onAddComment: addComment,
@@ -114,6 +145,7 @@ export const getForPost = (id) => {
 
 PostPage.propTypes = {
   classes: PropTypes.object.isRequired,
+  history: PropTypes.object,
   match: PropTypes.object,
 };
 

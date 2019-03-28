@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyle from 'react-jss';
 import { Link } from 'react-router-dom';
 import withLoading from '../../hocs/withLoading';
 import PostComponentLoading from './PostComponentLoading';
 import PostComponentStyle from './PostComponentStyle';
+import PostForm from '../post-form';
+import Button from '../common/button';
 import Categories from '../categories';
 import CommentList from '../comment-list';
 import CommentCreate from '../comment-create';
@@ -17,6 +19,9 @@ const PostComponent = (props) => {
     classes,
     post,
     authorizedUser,
+    getMoreCategories,
+    onUpdate,
+    onDelete,
     onAddComment,
     onUpdateComment,
     onDeleteComment,
@@ -28,21 +33,53 @@ const PostComponent = (props) => {
     return null;
   }
 
+  const [isEditState, setEditState] = useState(false);
+  const onEditClick = () => setEditState(true);
+  const onCancelClick = () => setEditState(false);
+
   return (
     <>
-      <div className={classes.root}>
-        <h3>{post.title}</h3>
-        <p className={classes.contentPreview}>
-          {post.content}
-        </p>
-        <div className={classes.footer}>
-          <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>@{post.author.name}</Link>
-          {authorizedUser ? <RatePanel rate={post.rate} onRate={onRate}/> : null}
-          <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>
+      {isEditState
+        ? <PostForm
+          className={classes.form}
+          post={post}
+          getMoreCategories={getMoreCategories}
+          onSave={onUpdate}
+          onCancel={onCancelClick}
+        />
+        : <>
+          <div className={classes.root}>
+            <h3>{post.title}</h3>
+            <p className={classes.contentPreview}>
+              {post.content}
+            </p>
+            <div className={classes.footer}>
+              <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>@{post.author.name}</Link>
+              {authorizedUser ? <RatePanel rate={post.rate} onRate={onRate}/> : null}
+              <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>
+            </div>
+          </div>
+          <Categories className={classes.categories} categories={post.categories}/>
+        </>
+      }
+      { authorizedUser.id === post.author.id && !isEditState ? (
+        <div className={classes.actionPanel}>
+          <Button
+            className={classes.actionPanelButton}
+            onClick={onEditClick}
+          >
+            Edit
+          </Button>
+          <Button
+            className={classes.actionPanelButton}
+            type='danger'
+            onClick={onDelete}
+          >
+            Delete
+          </Button>
         </div>
-      </div>
-      <Categories className={classes.categories} categories={post.categories}/>
-      {authorizedUser && <CommentCreate onAdd={onAddComment}/>}
+      ) : null }
+      {authorizedUser && <CommentCreate className={classes.createComment} onAdd={onAddComment}/>}
       <CommentList
         className={classes.comments}
         comments={post.comments}
@@ -58,6 +95,9 @@ PostComponent.propTypes = {
   classes: PropTypes.object,
   post: PropTypes.object,
   authorizedUser: PropTypes.object,
+  getMoreCategories: PropTypes.func,
+  onUpdate: PropTypes.func,
+  onDelete: PropTypes.func,
   onAddComment: PropTypes.func,
   onUpdateComment: PropTypes.func,
   onDeleteComment: PropTypes.func,

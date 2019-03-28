@@ -1,40 +1,20 @@
-export default theme => ({
-  page: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  form: {
-    maxWidth: '600px',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '10px',
-    boxSizing: 'border-box',
-    border: `1px solid ${theme.brandPrimaryColor}`,
-    borderRadius: theme.borderRadius,
-  },
-  formLabel: {
-    width: '100%',
-    display: 'flex',
-    marginBottom: '10px',
-    'last-of-type': {
-      marginBottom: 'none',
+import FormStyles from '../../components/form/FormStyles';
+
+export default (theme) => {
+  const formStyles = FormStyles(theme);
+
+  return {
+    ...formStyles,
+    page: {
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
     },
-  },
-  formField: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '10px',
-    'last-of-type': {
-      marginBottom: 'none',
+    actionButton: {
+      marginRight: '10px',
+      '&:last-of-type': {
+        marginRight: '0',
+      },
     },
-  },
-  actionButton: {
-    marginRight: '10px',
-    '&:last-of-type': {
-      marginRight: '0',
-    },
-  },
-});
+  };
+};

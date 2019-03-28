@@ -8,15 +8,11 @@ export const style = theme => ({
     minHeight: '32px',
     border: `1px solid ${theme.brandPrimaryColor}`,
     borderRadius: theme.borderRadius,
-    backgroundColor: 'transparent',
     cursor: 'pointer',
     transition: 'background-color linear 100ms',
     outline: 'none',
     minWidth: '80px',
     fontSize: '14px',
-    '&:hover': {
-      backgroundColor: theme.brandPrimaryColor,
-    },
     '&:disabled': {
       cursor: 'default',
       backgroundColor: theme.brandPrimaryColor,
@@ -24,12 +20,31 @@ export const style = theme => ({
     '&.mobile': {
       minWidth: 'initial',
     },
+    '&.primary': {
+      backgroundColor: 'transparent',
+    },
+    '&.primary:hover': {
+      backgroundColor: theme.brandPrimaryColor,
+    },
+    '&.secondary': {
+      backgroundColor: 'transparent',
+    },
+    '&.secondary:hover': {
+      backgroundColor: 'transparent',
+    },
+    '&.danger': {
+      backgroundColor: '#ef5350',
+    },
+    '&.danger:hover': {
+      backgroundColor: '#d32f2f',
+    },
   },
 });
 
 const ButtonComponent = (props) => {
   const {
     classes,
+    type = 'primary',
     children,
     onClick,
     className = '',
@@ -39,7 +54,7 @@ const ButtonComponent = (props) => {
 
   return (
     <button
-      className={`${classes.root} ${className} ${isMobile ? 'mobile' : ''}`}
+      className={`${classes.root} ${className} ${type} ${isMobile ? 'mobile' : ''}`}
       disabled={disabled}
       onClick={onClick}
     >
@@ -50,6 +65,7 @@ const ButtonComponent = (props) => {
 
 ButtonComponent.propTypes = {
   classes: PropTypes.object,
+  type: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,

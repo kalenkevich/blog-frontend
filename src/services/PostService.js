@@ -71,10 +71,13 @@ export default class PostService {
 
   static async deletePost(postId) {
     const { deletePost } = await BackendGraphQLConnector.mutate({
-      variables: { postId },
+      variables: { postId: parseInt(postId, 10) },
       mutation: gql`
         mutation DeletePost($postId: Float!) {
-          deletePost(postId: $postId)
+          deletePost(postId: $postId) {
+            code
+            message
+          }
         }
       `,
     });
