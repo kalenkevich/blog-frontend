@@ -15,6 +15,7 @@ export default (theme) => {
     },
     content: {
       minHeight: '600px',
+      height: '100%',
     },
     title: {
       fontSize: '24px',

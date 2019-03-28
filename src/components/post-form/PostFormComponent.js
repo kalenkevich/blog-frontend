@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../common/button';
 import EditableText from '../common/editable-text';
 import EditableLabel from '../common/editable-label';
 import EditableCategories from '../categories-editable';
 import PostFormStyles from './PostFormComponentStyle';
+import MobileContext from '../../context/MobileContext';
 
 export const PostForm = (props) => {
   const {
@@ -16,6 +18,7 @@ export const PostForm = (props) => {
     onSave,
     onCancel,
   } = props;
+  const { isMobile } = useContext(MobileContext);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [categories, setCategories] = useState([]);
@@ -70,13 +73,13 @@ export const PostForm = (props) => {
         <Button className={classes.actionButtonPanelButton}
           onClick={onSaveClick}
         >
-          Save
+          { isMobile ? <FontAwesomeIcon icon='save'/> : 'Save'}
         </Button>
         <Button
           className={classes.actionButtonPanelButton}
           onClick={onCancelClick}
         >
-          Cancel
+          { isMobile ? <FontAwesomeIcon icon='undo'/> : 'Cancel'}
         </Button>
       </div>
     </div>

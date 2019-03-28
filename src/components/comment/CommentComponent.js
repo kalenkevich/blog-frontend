@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { getFormattedDate } from '../../services/Formatter';
 import CommentComponentStyle from './CommentComponentStyle';
 import withAuthorization from '../../hocs/withAuthorization';
 import RatePanel from '../rate-panel';
+import MobileContext from '../../context/MobileContext';
 
 const CommentListItemComponent = (props) => {
   const {
@@ -20,6 +21,7 @@ const CommentListItemComponent = (props) => {
     onRate,
     onUpdate,
   } = props;
+  const { isMobile } = useContext(MobileContext);
   const [commentContent, setCommentContent] = useState(comment.content);
   const [isEditState, setEditState] = useState(false);
 
@@ -66,7 +68,7 @@ const CommentListItemComponent = (props) => {
 
                   setEditState(true);
                 }}>
-                <FontAwesomeIcon icon='pencil-alt'/>
+                { isMobile ? <FontAwesomeIcon icon='pencil-alt'/> : 'Edit'}
               </Button>
               : <Fragment>
                 <Button
@@ -76,7 +78,7 @@ const CommentListItemComponent = (props) => {
 
                     onSaveChanges();
                   }}>
-                  Save
+                  { isMobile ? <FontAwesomeIcon icon='save'/> : 'Save'}
                 </Button>
                 <Button
                   className={classes.actionPanelButton}
@@ -85,18 +87,19 @@ const CommentListItemComponent = (props) => {
 
                     onCancelChanges();
                   }}>
-                  Cancel
+                  { isMobile ? <FontAwesomeIcon icon='undo'/> : 'Cancel'}
                 </Button>
               </Fragment>
             )}
             <Button
+              type='danger'
               className={classes.actionPanelButton}
               onClick={(event) => {
                 event.stopPropagation();
 
                 onDelete();
               }}>
-              <FontAwesomeIcon icon='times'/>
+              { isMobile ? <FontAwesomeIcon icon='times'/> : 'Delete'}
             </Button>
           </div>)
           : null

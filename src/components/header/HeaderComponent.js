@@ -57,7 +57,7 @@ const HeaderComponent = (props) => {
 
   return (
     <div className={classes.headerContainer}>
-      <Link className={classes.brandTitle} to='/'>Header</Link>
+      <Link className={classes.brandTitle} to='/'>Blog</Link>
       {ResultPanel}
     </div>
   );

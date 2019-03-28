@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyle from 'react-jss';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import withLoading from '../../hocs/withLoading';
 import PostComponentLoading from './PostComponentLoading';
 import PostComponentStyle from './PostComponentStyle';
@@ -13,6 +14,7 @@ import CommentCreate from '../comment-create';
 import withAuthorization from '../../hocs/withAuthorization';
 import RatePanel from '../rate-panel';
 import { getFormattedDate } from '../../services/Formatter';
+import MobileContext from '../../context/MobileContext';
 
 const PostComponent = (props) => {
   const {
@@ -33,6 +35,7 @@ const PostComponent = (props) => {
     return null;
   }
 
+  const { isMobile } = useContext(MobileContext);
   const [isEditState, setEditState] = useState(false);
   const onEditClick = () => setEditState(true);
   const onCancelClick = () => setEditState(false);
@@ -68,14 +71,14 @@ const PostComponent = (props) => {
             className={classes.actionPanelButton}
             onClick={onEditClick}
           >
-            Edit
+            { isMobile ? <FontAwesomeIcon icon='pencil-alt'/> : 'Edit'}
           </Button>
           <Button
             className={classes.actionPanelButton}
             type='danger'
             onClick={onDelete}
           >
-            Delete
+            { isMobile ? <FontAwesomeIcon icon='times'/> : 'Delete'}
           </Button>
         </div>
       ) : null }

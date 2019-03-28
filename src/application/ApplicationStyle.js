@@ -1,5 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
+  faSave,
+  faUndo,
   faPlus,
   faUser,
   faSignOutAlt,
@@ -9,6 +11,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 
+library.add(faSave);
+library.add(faUndo);
 library.add(faPlus);
 library.add(faUser);
 library.add(faTimes);
