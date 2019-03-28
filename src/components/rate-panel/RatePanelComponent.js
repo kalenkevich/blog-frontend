@@ -15,12 +15,14 @@ export const RatePanelComponent = ({
 }) => (
   <div className={classes.rateWrapper}>
     <Button className={classes.rateActionButton}
+      type='success'
       onClick={() => onRate(RATE_ACTIONS.UP)}
     >
       <FontAwesomeIcon icon={['far', 'thumbs-up']}/>
     </Button>
     <div className={classes.rateLabel}>{rate}</div>
     <Button className={classes.rateActionButton}
+      type='danger'
       onClick={() => onRate(RATE_ACTIONS.DOWN)}
     >
       <FontAwesomeIcon icon={['far', 'thumbs-down']}/>

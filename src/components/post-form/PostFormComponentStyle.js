@@ -26,8 +26,8 @@ export default (theme) => {
       paddingTop: '10px',
     },
     actionButtonPanel: {
-      borderTop: `1px solid ${theme.brandPrimaryColor}`,
-      paddingTop: '10px',
+      borderBottom: `1px solid ${theme.brandPrimaryColor}`,
+      paddingBottom: '10px',
       justifyContent: 'flex-end',
     },
     actionButtonPanelButton: {

@@ -51,6 +51,19 @@ export const PostForm = (props) => {
 
   return (
     <div className={`${classes.form} ${className}`}>
+      <div className={`${classes.formField} ${classes.actionButtonPanel}`}>
+        <Button className={classes.actionButtonPanelButton}
+          onClick={onSaveClick}
+        >
+          { isMobile ? <FontAwesomeIcon icon='save'/> : 'Save'}
+        </Button>
+        <Button
+          className={classes.actionButtonPanelButton}
+          onClick={onCancelClick}
+        >
+          { isMobile ? <FontAwesomeIcon icon='undo'/> : 'Cancel'}
+        </Button>
+      </div>
       <EditableLabel
         className={`${classes.formField} ${classes.title}`}
         value={title}
@@ -69,19 +82,6 @@ export const PostForm = (props) => {
         onChange={setCategories}
         getMoreCategories={getMoreCategories}
       />
-      <div className={`${classes.formField} ${classes.actionButtonPanel}`}>
-        <Button className={classes.actionButtonPanelButton}
-          onClick={onSaveClick}
-        >
-          { isMobile ? <FontAwesomeIcon icon='save'/> : 'Save'}
-        </Button>
-        <Button
-          className={classes.actionButtonPanelButton}
-          onClick={onCancelClick}
-        >
-          { isMobile ? <FontAwesomeIcon icon='undo'/> : 'Cancel'}
-        </Button>
-      </div>
     </div>
   );
 };

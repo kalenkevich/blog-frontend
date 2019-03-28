@@ -38,6 +38,12 @@ export const style = theme => ({
     '&.danger:hover': {
       backgroundColor: '#d32f2f',
     },
+    '&.success': {
+      backgroundColor: '#8bc34a',
+    },
+    '&.success:hover': {
+      backgroundColor: '#689f38',
+    },
   },
 });
 
