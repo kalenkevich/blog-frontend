@@ -37,10 +37,10 @@ const EditableTextComponent = (props) => {
     value,
     onChange,
     placeholder,
-    viewOnly,
   } = props;
   const [isEdit, setEditState] = useState(false);
   const [editor, setEditor] = useState();
+  // eslint-disable-next-line max-len
   const [editorState, setState] = useState(value ? EditorState.createWithContent(stateFromHTML(value)) : EditorState.createEmpty());
   const focusEditor = () => editor.focus();
   const handleKeyCommand = (command, state) => {

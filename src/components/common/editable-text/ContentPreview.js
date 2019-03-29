@@ -9,6 +9,17 @@ import { stateFromHTML } from 'draft-js-import-html';
 import { getBlockStyle, styleMap } from './EditableTextComponent';
 import EditableTextComponentStyle from './EditableTextComponentStyle';
 
+export const ContentPreviewStyles = (theme) => {
+  const editableTextComponentStyle = EditableTextComponentStyle(theme);
+
+  return {
+    root: {
+      ...editableTextComponentStyle.editor,
+      cursor: 'default',
+    },
+  };
+};
+
 const ContentPreview = ({ classes, value, className }) => {
   const [editorState, setState] = useState(EditorState.createEmpty());
 
@@ -19,8 +30,9 @@ const ContentPreview = ({ classes, value, className }) => {
   }, [value]);
 
   return (
-    <div className={`${classes.editor} ${className}`}>
+    <div className={`${classes.root} ${className}`}>
       <Editor
+        readOnly
         blockStyleFn={getBlockStyle}
         customStyleMap={styleMap}
         editorState={editorState}
@@ -36,4 +48,4 @@ ContentPreview.propTypes = {
   className: PropTypes.string,
 };
 
-export default withStyles(EditableTextComponentStyle)(ContentPreview);
+export default withStyles(ContentPreviewStyles)(ContentPreview);

@@ -6,12 +6,11 @@ export default theme => ({
   },
   title: {
     textDecoration: 'none',
-    color: theme.titleColor,
-    '&:hover': {
-      color: theme.titleHoverColor,
-    },
+    color: theme.titleHoverColor,
+    cursor: 'pointer',
   },
   contentPreview: {
+    cursor: 'pointer',
     whiteSpace: 'pre-line',
     marginBottom: '10px',
     width: '100%',

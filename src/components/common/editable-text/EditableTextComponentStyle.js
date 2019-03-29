@@ -16,11 +16,6 @@ export default theme => ({
       color: '#a9a9a9',
     },
   },
-  actionPanel: {
-    display: 'flex',
-    height: '30px',
-    flexWrap: 'wrap',
-  },
   editor: {
     marginTop: '10px',
     cursor: 'text;',
@@ -46,6 +41,11 @@ export default theme => ({
       fontSize: '16px',
       padding: '20px',
     },
+  },
+  actionPanel: {
+    display: 'flex',
+    height: '30px',
+    flexWrap: 'wrap',
   },
   actionPanelButton: {
     marginLeft: '10px',
