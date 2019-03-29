@@ -22,9 +22,9 @@ export const PostForm = (props) => {
     onCancel,
   } = props;
   const { isMobile } = useContext(MobileContext);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [categories, setCategories] = useState([]);
+  const [title, setTitle] = useState(post ? post.title : '');
+  const [content, setContent] = useState(post ? post.content : '');
+  const [categories, setCategories] = useState(post ? post.categories : []);
   const onSaveClick = () => {
     onSave({
       title,

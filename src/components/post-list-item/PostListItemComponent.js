@@ -10,6 +10,7 @@ import withAuthorization from '../../hocs/withAuthorization';
 import MobileContext from '../../context/MobileContext';
 import RatePanel from '../rate-panel';
 import AuthorPanel from '../author-panel';
+import ContentPreview from '../common/editable-text/ContentPreview';
 
 const PostListItem = (props) => {
   const {
@@ -30,8 +31,11 @@ const PostListItem = (props) => {
         <AuthorPanel className={classes.authorPanel} author={post.author}/>
         <Link className={classes.title} to={`/post/${post.id}`}>
           <h3>{post.title}</h3>
+          <ContentPreview
+            className={classes.contentPreview}
+            value={post.contentPreview}
+          />
         </Link>
-        <div className={classes.contentPreview}>{post.contentPreview}</div>
         <div className={classes.footer}>
           { authorizedUser ? <RatePanel rate={post.rate} onRate={onRate}/> : null}
           <div className={classes.commentsCount}>

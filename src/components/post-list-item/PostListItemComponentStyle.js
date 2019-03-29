@@ -15,6 +15,13 @@ export default theme => ({
     whiteSpace: 'pre-line',
     marginBottom: '10px',
     width: '100%',
+    '& p': {
+      margin: '0',
+      marginBlockStart: '0px',
+      marginBlockEnd: '0px',
+      marginInlineStart: '0px',
+      marginInlineEnd: '0px',
+    },
   },
   content: {
     whiteSpace: 'pre-line',

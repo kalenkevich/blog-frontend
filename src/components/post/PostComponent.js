@@ -13,8 +13,9 @@ import CommentList from '../comment-list';
 import CommentCreate from '../comment-create';
 import withAuthorization from '../../hocs/withAuthorization';
 import RatePanel from '../rate-panel';
-import { getFormattedDate } from '../../services/Formatter';
 import MobileContext from '../../context/MobileContext';
+import ContentPreview from '../common/editable-text/ContentPreview';
+import { getFormattedDate } from '../../services/Formatter';
 
 const PostComponent = (props) => {
   const {
@@ -73,9 +74,10 @@ const PostComponent = (props) => {
               ) : null }
             </div>
             <h3>{post.title}</h3>
-            <p className={classes.contentPreview}>
-              {post.content}
-            </p>
+            <ContentPreview
+              className={classes.contentPreview}
+              value={post.content}
+            />
             <div className={classes.footer}>
               {authorizedUser ? <RatePanel rate={post.rate} onRate={onRate}/> : null}
               <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>

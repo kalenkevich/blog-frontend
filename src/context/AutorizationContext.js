@@ -17,7 +17,7 @@ export const AuthorizationConsumer = AuthorizationContext.Consumer;
 
 const AuthorizationComponent = ({ children, history }) => {
   const [authorizedUser, setAuthorizedUser] = useState(null);
-  const [authorizationProcess, setAuthorizationProcessState] = useState(false);
+  const [authorizationProcess, setAuthorizationProcessState] = useState(true);
   const authorize = async () => {
     let user = null;
     let error = null;
