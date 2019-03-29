@@ -1,7 +1,6 @@
 import React, { useState, Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../common/button';
 import TextArea from '../common/text-area';
@@ -9,6 +8,7 @@ import { getFormattedDate } from '../../services/Formatter';
 import CommentComponentStyle from './CommentComponentStyle';
 import withAuthorization from '../../hocs/withAuthorization';
 import RatePanel from '../rate-panel';
+import AuthorPanel from '../author-panel';
 import MobileContext from '../../context/MobileContext';
 
 const CommentListItemComponent = (props) => {
@@ -44,20 +44,8 @@ const CommentListItemComponent = (props) => {
       onClick={onClick}
       className={classes.comment}
     >
-      <div className={classes.contentWrapper}>
-        { isEditState
-          ? <TextArea
-            className={classes.contentTextArea}
-            autoFocus
-            value={commentContent}
-            onChange={event => setCommentContent(event.target.value)}
-          />
-          : (
-            <p className={classes.content}>
-              {commentContent}
-            </p>
-          )
-        }
+      <div className={classes.authorPanel}>
+        <AuthorPanel author={comment.author}/>
         {authorizedUser && authorizedUser.id === comment.author.id
           ? (<div className={classes.actionPanel}>
             {(!isEditState
@@ -105,8 +93,22 @@ const CommentListItemComponent = (props) => {
           : null
         }
       </div>
+      <div className={classes.contentWrapper}>
+        { isEditState
+          ? <TextArea
+            className={classes.contentTextArea}
+            autoFocus
+            value={commentContent}
+            onChange={event => setCommentContent(event.target.value)}
+          />
+          : (
+            <p className={classes.content}>
+              {commentContent}
+            </p>
+          )
+        }
+      </div>
       <div className={classes.footer}>
-        <Link className={classes.createdUserName} to={`/user/${comment.author.id}`}>@{comment.author.name}</Link>
         {authorizedUser
           ? <RatePanel rate={comment.rate} onRate={onRate}/>
           : null

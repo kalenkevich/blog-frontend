@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../common/button';
+import AuthorPanel from '../author-panel';
 import EditableText from '../common/editable-text';
 import EditableLabel from '../common/editable-label';
 import EditableCategories from '../categories-editable';
 import PostFormStyles from './PostFormComponentStyle';
 import MobileContext from '../../context/MobileContext';
+import withAuthorization from '../../hocs/withAuthorization';
 
 export const PostForm = (props) => {
   const {
     post,
     classes,
     className,
+    authorizedUser,
     getMoreCategories,
     onSave,
     onCancel,
@@ -51,18 +54,21 @@ export const PostForm = (props) => {
 
   return (
     <div className={`${classes.form} ${className}`}>
-      <div className={`${classes.formField} ${classes.actionButtonPanel}`}>
-        <Button className={classes.actionButtonPanelButton}
-          onClick={onSaveClick}
-        >
-          { isMobile ? <FontAwesomeIcon icon='save'/> : 'Save'}
-        </Button>
-        <Button
-          className={classes.actionButtonPanelButton}
-          onClick={onCancelClick}
-        >
-          { isMobile ? <FontAwesomeIcon icon='undo'/> : 'Cancel'}
-        </Button>
+      <div className={classes.authorPanel}>
+        <AuthorPanel author={authorizedUser}/>
+        <div className={classes.actionButtonPanel}>
+          <Button className={classes.actionButtonPanelButton}
+            onClick={onSaveClick}
+          >
+            { isMobile ? <FontAwesomeIcon icon='save'/> : 'Save'}
+          </Button>
+          <Button
+            className={classes.actionButtonPanelButton}
+            onClick={onCancelClick}
+          >
+            { isMobile ? <FontAwesomeIcon icon='undo'/> : 'Cancel'}
+          </Button>
+        </div>
       </div>
       <EditableLabel
         className={`${classes.formField} ${classes.title}`}
@@ -90,9 +96,10 @@ PostForm.propTypes = {
   post: PropTypes.object,
   classes: PropTypes.object,
   className: PropTypes.string,
+  authorizedUser: PropTypes.object,
   onSave: PropTypes.func,
   onCancel: PropTypes.func,
   getMoreCategories: PropTypes.func,
 };
 
-export default withStyles(PostFormStyles)(PostForm);
+export default withAuthorization(withStyles(PostFormStyles)(PostForm));

@@ -11,12 +11,13 @@ export default theme => ({
   userAvatarUrl: {
     width: '150px',
     height: '150px',
+    objectFit: 'contain',
   },
   userName: {
     fontSize: '24px',
   },
   userDetails: {
-    marginLeft: '10px',
+    marginLeft: '20px',
   },
   userDescription: {
     marginTop: '10px',

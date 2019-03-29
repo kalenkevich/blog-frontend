@@ -24,7 +24,6 @@ export default (theme) => {
     actionPanel: {
       display: 'flex',
       justifyContent: 'flex-end',
-      marginLeft: '10px',
       height: 'fit-content',
     },
     actionPanelButton: {
@@ -43,6 +42,6 @@ export default (theme) => {
     },
     footer: postComponentStyle.footer,
     creationDate: postComponentStyle.creationDate,
-    createdUserName: postComponentStyle.createdUserName,
+    authorPanel: postComponentStyle.authorPanel,
   };
 };

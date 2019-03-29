@@ -25,10 +25,12 @@ export default (theme) => {
       borderTop: `1px solid ${theme.brandPrimaryColor}`,
       paddingTop: '10px',
     },
-    actionButtonPanel: {
+    authorPanel: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
       borderBottom: `1px solid ${theme.brandPrimaryColor}`,
       paddingBottom: '10px',
-      justifyContent: 'flex-end',
     },
     actionButtonPanelButton: {
       marginRight: '10px',

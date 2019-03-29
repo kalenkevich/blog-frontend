@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import withLoading from '../../hocs/withLoading';
+import Icon from '../common/icon';
 import UserProfileComponentStyle from './UserProfileComponentStyle';
 import UserProfileComponentLoading from './UserProfileComponentLoading';
 
@@ -15,7 +16,7 @@ const UserProfileComponent = (props) => {
   return (
     <div className={`${className} ${classes.userProfilePageContainer}`}>
       <div>
-        <img className={classes.userAvatarUrl} src={user.avatarUrl}/>
+        <Icon className={classes.userAvatarUrl} src={user.avatarUrl} type={'USER_ICON'}/>
       </div>
       <div className={classes.userDetails}>
         <div className={classes.userName}>{user.name}</div>

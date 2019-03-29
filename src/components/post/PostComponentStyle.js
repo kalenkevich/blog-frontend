@@ -5,10 +5,15 @@ export default (theme) => {
 
   return {
     ...postListItemComponentStyle,
+    authorPanel: {
+      ...postListItemComponentStyle.authorPanel,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
     actionPanel: {
       display: 'flex',
       justifyContent: 'flex-end',
-      padding: '10px',
     },
     createComment: {
       marginTop: '30px',

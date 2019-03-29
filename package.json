@@ -72,6 +72,7 @@
     "jest": "^24.1.0",
     "node-fetch": "^2.3.0",
     "nodemon": "^1.18.10",
+    "url-loader": "^1.1.2",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.2.0",

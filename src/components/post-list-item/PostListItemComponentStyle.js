@@ -28,10 +28,9 @@ export default theme => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  createdUserName: {
-    width: '30%',
-    textDecoration: 'none',
-    color: theme.authorColor,
+  authorPanel: {
+    borderBottom: `1px solid ${theme.brandPrimaryColor}`,
+    paddingBottom: '10px',
   },
   commentsCount: {
     width: '20%',

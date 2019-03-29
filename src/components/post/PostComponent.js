@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyle from 'react-jss';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import withLoading from '../../hocs/withLoading';
 import PostComponentLoading from './PostComponentLoading';
@@ -9,6 +8,7 @@ import PostComponentStyle from './PostComponentStyle';
 import PostForm from '../post-form';
 import Button from '../common/button';
 import Categories from '../categories';
+import AuthorPanel from '../author-panel';
 import CommentList from '../comment-list';
 import CommentCreate from '../comment-create';
 import withAuthorization from '../../hocs/withAuthorization';
@@ -52,12 +52,31 @@ const PostComponent = (props) => {
         />
         : <>
           <div className={classes.root}>
+            <div className={classes.authorPanel}>
+              <AuthorPanel author={post.author}/>
+              { authorizedUser && (authorizedUser.id === post.author.id && !isEditState) ? (
+                <div className={classes.actionPanel}>
+                  <Button
+                    className={classes.actionPanelButton}
+                    onClick={onEditClick}
+                  >
+                    { isMobile ? <FontAwesomeIcon icon='pencil-alt'/> : 'Edit'}
+                  </Button>
+                  <Button
+                    className={classes.actionPanelButton}
+                    type='danger'
+                    onClick={onDelete}
+                  >
+                    { isMobile ? <FontAwesomeIcon icon='times'/> : 'Delete'}
+                  </Button>
+                </div>
+              ) : null }
+            </div>
             <h3>{post.title}</h3>
             <p className={classes.contentPreview}>
               {post.content}
             </p>
             <div className={classes.footer}>
-              <Link className={classes.createdUserName} to={`/user/${post.author.id}`}>@{post.author.name}</Link>
               {authorizedUser ? <RatePanel rate={post.rate} onRate={onRate}/> : null}
               <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>
             </div>
@@ -65,23 +84,6 @@ const PostComponent = (props) => {
           <Categories className={classes.categories} categories={post.categories}/>
         </>
       }
-      { authorizedUser.id === post.author.id && !isEditState ? (
-        <div className={classes.actionPanel}>
-          <Button
-            className={classes.actionPanelButton}
-            onClick={onEditClick}
-          >
-            { isMobile ? <FontAwesomeIcon icon='pencil-alt'/> : 'Edit'}
-          </Button>
-          <Button
-            className={classes.actionPanelButton}
-            type='danger'
-            onClick={onDelete}
-          >
-            { isMobile ? <FontAwesomeIcon icon='times'/> : 'Delete'}
-          </Button>
-        </div>
-      ) : null }
       {authorizedUser && <CommentCreate className={classes.createComment} onAdd={onAddComment}/>}
       <CommentList
         className={classes.comments}
