@@ -5,11 +5,17 @@ import { withRouter } from 'react-router-dom';
 import Post from '../../components/post';
 import PostService from '../../services/PostService';
 import PostPageStyle from './PostPageStyle';
+import withAuthorization from '../../hocs/withAuthorization';
 
 const PostPage = (props) => {
-  const { classes, match, history } = props;
+  const {
+    classes,
+    match,
+    history,
+    authorizedUser,
+  } = props;
   const { postId } = match.params;
-  const forPost = getForPost(postId, history);
+  const forPost = getForPost(postId, history, authorizedUser);
 
   return (
     <div className={classes.postPageContainer}>
@@ -18,7 +24,7 @@ const PostPage = (props) => {
   );
 };
 
-export const getForPost = (id, history) => {
+export const getForPost = (id, history, authorizedUser) => {
   const [post, setPost] = useState(null);
   const [isLoading, setLoadingState] = useState(false);
 
@@ -95,22 +101,21 @@ export const getForPost = (id, history) => {
   };
 
   const ratePost = async (rateAction) => {
-    await PostService.ratePost(post.id, rateAction);
+    const action = rateAction === 'UP';
+    const updatedPost = await PostService.ratePost(post.id, action);
 
-    setPost({
-      ...post,
-      rate: post.rate + (rateAction === 'UP' ? 1 : -1),
-    });
+    setPost(updatedPost);
   };
 
   const rateComment = async (comment, rateAction) => {
-    await PostService.rateComment(comment.id, rateAction);
-
+    const action = rateAction === 'UP';
+    const updatedComment = await PostService.rateComment(comment.id, action);
     const updatedPostComments = (post.comments || []).map((c) => {
       if (c.id === comment.id) {
         return {
           ...c,
-          rate: c.rate + (rateAction === 'UP' ? 1 : -1),
+          rate: updatedComment.rate,
+          ratedUsers: updatedComment.ratedUsers,
         };
       }
 
@@ -145,8 +150,9 @@ export const getForPost = (id, history) => {
 
 PostPage.propTypes = {
   classes: PropTypes.object.isRequired,
+  authorizedUser: PropTypes.object,
   history: PropTypes.object,
   match: PropTypes.object,
 };
 
-export default withRouter(withStyles(PostPageStyle)(PostPage));
+export default withAuthorization(withRouter(withStyles(PostPageStyle)(PostPage)));

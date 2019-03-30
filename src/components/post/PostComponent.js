@@ -79,7 +79,7 @@ const PostComponent = (props) => {
               value={post.content}
             />
             <div className={classes.footer}>
-              {authorizedUser ? <RatePanel rate={post.rate} onRate={onRate}/> : null}
+              {authorizedUser ? <RatePanel rate={post.rate} ratedUsers={post.ratedUsers} onRate={onRate}/> : null}
               <div className={classes.creationDate}>{getFormattedDate(post.creationDate)}</div>
             </div>
           </div>

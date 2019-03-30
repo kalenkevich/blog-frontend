@@ -110,7 +110,7 @@ const CommentListItemComponent = (props) => {
       </div>
       <div className={classes.footer}>
         {authorizedUser
-          ? <RatePanel rate={comment.rate} onRate={onRate}/>
+          ? <RatePanel rate={comment.rate} ratedUsers={comment.ratedUsers} onRate={onRate}/>
           : null
         }
         <div className={classes.creationDate}>{getFormattedDate(comment.creationDate)}</div>

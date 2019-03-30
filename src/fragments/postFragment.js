@@ -12,6 +12,12 @@ export default gql`
       ...UserFragment
     }
     rate
+    ratedUsers {
+      user {
+        id
+      }
+      action
+    }
     categories {
       ...CategoryFragment
     }
@@ -34,6 +40,12 @@ export const PostPreviewFragment = gql`
       ...UserFragment
     }
     rate
+    ratedUsers {
+      user {
+        id
+      }
+      action
+    }
     categories {
       ...CategoryFragment
     }

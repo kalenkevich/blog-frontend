@@ -13,10 +13,6 @@ export const style = theme => ({
     outline: 'none',
     minWidth: '80px',
     fontSize: '14px',
-    '&:disabled': {
-      cursor: 'default',
-      backgroundColor: theme.brandPrimaryColor,
-    },
     '&.mobile': {
       minWidth: 'initial',
     },
@@ -43,6 +39,14 @@ export const style = theme => ({
     },
     '&.success:hover': {
       backgroundColor: '#689f38',
+    },
+    '&:disabled': {
+      cursor: 'default',
+      backgroundColor: theme.brandPrimaryColor,
+    },
+    '&:disabled:hover': {
+      cursor: 'default',
+      backgroundColor: theme.brandPrimaryColor,
     },
   },
 });

@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import PostFragment, { PostPreviewFragment } from '../fragments/postFragment';
+import CommentFragment from '../fragments/commnetFragment';
 import CategoryFragment from '../fragments/categoryFragment';
 import BackendGraphQLConnector from './BackendGraphQLConnector';
 
@@ -169,12 +170,12 @@ export default class PostService {
     const { ratePost: result } = await BackendGraphQLConnector.mutate({
       variables: { postId: parseInt(postId, 10), rateAction },
       mutation: gql`
-        mutation RatePost($postId: Float!, $rateAction: String!) {
+        mutation RatePost($postId: Float!, $rateAction: Boolean!) {
           ratePost(postId: $postId, rateAction: $rateAction) {
-            code
-            message
+            ...PostFragment
           }
         }
+        ${PostFragment}
       `,
     });
 
@@ -182,15 +183,15 @@ export default class PostService {
   }
 
   static async rateComment(commentId, rateAction) {
-    const { ratePost: result } = await BackendGraphQLConnector.mutate({
+    const { rateComment: result } = await BackendGraphQLConnector.mutate({
       variables: { commentId: parseInt(commentId, 10), rateAction },
       mutation: gql`
-        mutation RateComment($commentId: Float!, $rateAction: String!) {
+        mutation RateComment($commentId: Float!, $rateAction: Boolean!) {
           rateComment(commentId: $commentId, rateAction: $rateAction) {
-            code
-            message
+            ...CommentFragment
           }
         }
+        ${CommentFragment}
       `,
     });
 

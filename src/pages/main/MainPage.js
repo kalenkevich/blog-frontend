@@ -63,12 +63,14 @@ export const forPosts = (history) => {
   };
 
   const onRate = async (post, rateAction) => {
-    await PostService.ratePost(post.id, rateAction);
+    const action = rateAction === 'UP';
+    const updatedPost = await PostService.ratePost(post.id, action);
     const updatedPosts = (posts || []).map((p) => {
-      if (p.id === post.id) {
+      if (p.id === updatedPost.id) {
         return {
           ...p,
-          rate: p.rate + (rateAction === 'UP' ? 1 : -1),
+          rate: updatedPost.rate,
+          ratedUsers: updatedPost.ratedUsers,
         };
       }
 
@@ -95,10 +97,6 @@ export const forPosts = (history) => {
       onClick: () => fetchPosts(),
     },
   };
-};
-
-export const setSearchQuery = (searchQuery) => {
-  window.location.query = searchQuery;
 };
 
 MainPage.propTypes = {

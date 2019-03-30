@@ -37,7 +37,7 @@ const PostListItem = (props) => {
           />
         </Link>
         <div className={classes.footer}>
-          { authorizedUser ? <RatePanel rate={post.rate} onRate={onRate}/> : null}
+          { authorizedUser ? <RatePanel rate={post.rate} ratedUsers={post.ratedUsers} onRate={onRate}/> : null}
           <div className={classes.commentsCount}>
             {post.commentsCount}
             <span className={classes.commentLabelWrapper}>

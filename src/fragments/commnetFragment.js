@@ -10,6 +10,12 @@ export default gql`
     author {
       ...UserFragment
     }
+    ratedUsers {
+      user {
+        id
+      }
+      action
+    }
   }
   ${UserFragment}
 `;
