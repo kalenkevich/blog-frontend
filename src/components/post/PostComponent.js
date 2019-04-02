@@ -22,7 +22,6 @@ const PostComponent = (props) => {
     classes,
     post,
     authorizedUser,
-    getMoreCategories,
     onUpdate,
     onDelete,
     onAddComment,
@@ -47,7 +46,6 @@ const PostComponent = (props) => {
         ? <PostForm
           className={classes.form}
           post={post}
-          getMoreCategories={getMoreCategories}
           onSave={onUpdate}
           onCancel={onCancelClick}
         />
@@ -102,7 +100,6 @@ PostComponent.propTypes = {
   classes: PropTypes.object,
   post: PropTypes.object,
   authorizedUser: PropTypes.object,
-  getMoreCategories: PropTypes.func,
   onUpdate: PropTypes.func,
   onDelete: PropTypes.func,
   onAddComment: PropTypes.func,

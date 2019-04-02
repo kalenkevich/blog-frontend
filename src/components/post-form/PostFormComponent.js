@@ -17,7 +17,6 @@ export const PostForm = (props) => {
     classes,
     className,
     authorizedUser,
-    getMoreCategories,
     onSave,
     onCancel,
   } = props;
@@ -70,6 +69,11 @@ export const PostForm = (props) => {
           </Button>
         </div>
       </div>
+      <EditableCategories
+        className={`${classes.formField} ${classes.categories}`}
+        categories={categories}
+        onChange={setCategories}
+      />
       <EditableLabel
         className={`${classes.formField} ${classes.title}`}
         value={title}
@@ -82,12 +86,6 @@ export const PostForm = (props) => {
         value={content}
         onChange={setContent}
       />
-      <EditableCategories
-        className={`${classes.formField} ${classes.categories}`}
-        categories={categories}
-        onChange={setCategories}
-        getMoreCategories={getMoreCategories}
-      />
     </div>
   );
 };
@@ -99,7 +97,6 @@ PostForm.propTypes = {
   authorizedUser: PropTypes.object,
   onSave: PropTypes.func,
   onCancel: PropTypes.func,
-  getMoreCategories: PropTypes.func,
 };
 
 export default withAuthorization(withStyles(PostFormStyles)(PostForm));

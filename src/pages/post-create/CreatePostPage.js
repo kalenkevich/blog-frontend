@@ -13,13 +13,10 @@ const CreatePostPage = (props) => {
 
     history.push(`/post/${post.id}`);
   };
-  const getMoreCategories = query => PostService.fetchCategories(query);
-
   return (
     <PostForm
       className={classes.form}
       post={null}
-      getMoreCategories={getMoreCategories}
       onSave={createPost}
     />
   );

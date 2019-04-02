@@ -12,6 +12,7 @@ const InputComponent = (props) => {
     type = 'text',
     placeholder = '',
     onBlur = () => {},
+    onEnter = () => {},
     autoFocus = false,
   } = props;
 
@@ -24,6 +25,7 @@ const InputComponent = (props) => {
       onChange={onChange}
       onBlur={onBlur}
       autoFocus={autoFocus}
+      onKeyPress={e => e.key === 'Enter' && onEnter()}
     />
   );
 };
@@ -34,6 +36,7 @@ InputComponent.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
+  onEnter: PropTypes.func,
   type: PropTypes.string,
   autoFocus: PropTypes.bool,
   placeholder: PropTypes.string,

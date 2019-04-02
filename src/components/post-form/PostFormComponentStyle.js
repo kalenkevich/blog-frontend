@@ -22,8 +22,7 @@ export default (theme) => {
       height: '42px',
     },
     categories: {
-      borderTop: `1px solid ${theme.brandPrimaryColor}`,
-      paddingTop: '10px',
+      marginTop: '10px',
     },
     authorPanel: {
       display: 'flex',

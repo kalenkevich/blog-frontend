@@ -1,7 +1,6 @@
 import gql from 'graphql-tag';
 import PostFragment, { PostPreviewFragment } from '../fragments/postFragment';
 import CommentFragment from '../fragments/commnetFragment';
-import CategoryFragment from '../fragments/categoryFragment';
 import BackendGraphQLConnector from './BackendGraphQLConnector';
 
 export default class PostService {
@@ -55,8 +54,9 @@ export default class PostService {
   }
 
   static async updatePost(post) {
+    const categories = (post.categories || []).map(({ id, value }) => ({ id, value }));
     const { updatePost } = await BackendGraphQLConnector.mutate({
-      variables: { post },
+      variables: { post: { ...post, categories } },
       mutation: gql`
         mutation UpdatePost($post: PostInput!) {
           updatePost(post: $post) {
@@ -132,22 +132,6 @@ export default class PostService {
     });
 
     return updatedPost;
-  }
-
-  static async fetchCategories(query) {
-    const { getCategories: categories } = await BackendGraphQLConnector.query({
-      variables: { query },
-      query: gql`
-        query GetCategories($query: String!) {
-          getCategories(query: $query) {
-            ...CategoryFragment
-          }
-        }
-        ${CategoryFragment}
-      `,
-    });
-
-    return categories;
   }
 
   static async searchPosts(query) {

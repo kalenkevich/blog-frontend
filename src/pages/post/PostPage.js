@@ -24,7 +24,7 @@ const PostPage = (props) => {
   );
 };
 
-export const getForPost = (id, history, authorizedUser) => {
+export const getForPost = (id, history) => {
   const [post, setPost] = useState(null);
   const [isLoading, setLoadingState] = useState(false);
 
@@ -128,8 +128,6 @@ export const getForPost = (id, history, authorizedUser) => {
     });
   };
 
-  const getMoreCategories = query => PostService.fetchCategories(query);
-
   useEffect(() => {
     fetchPost(id);
   }, []);
@@ -137,7 +135,6 @@ export const getForPost = (id, history, authorizedUser) => {
   return {
     post,
     isLoading,
-    getMoreCategories,
     onUpdate: updatePost,
     onDelete: deletePost,
     onRate: ratePost,

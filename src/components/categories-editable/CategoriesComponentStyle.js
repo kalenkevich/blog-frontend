@@ -7,18 +7,22 @@ export default (theme) => {
     root: {
       ...tagListComponentStyle.root,
       alignItems: 'center',
+      border: theme.border,
+      height: '45px',
+      paddingLeft: '5px',
+    },
+    autocomplete: {
+      '& > input': {
+        border: 'none',
+      },
     },
     category: {
       ...tagListComponentStyle.category,
       transition: 'none',
-      padding: '0',
       display: 'flex',
       alignItems: 'center',
       '&:hover': {
         backgroundColor: 'none',
-      },
-      '&:last-of-type': {
-        marginRight: '5px',
       },
     },
     removeCategory: {
@@ -26,7 +30,6 @@ export default (theme) => {
     },
     newCategory: {
       marginRight: '5px',
-      marginTop: '5px',
       width: '200px',
       height: '34px',
     },
