@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../common/button';
 import RatePanelComponentStyles from './RatePanelComponentStyle';
-import withAuthorization from '../../hocs/withAuthorization';
+import AuthorizationContext from '../../context/AuthorizationContext';
 
 export const RATE_ACTIONS = {
   UP: 'UP',
@@ -17,9 +17,9 @@ export const RatePanelComponent = (props) => {
     rate,
     ratedUsers,
     onRate,
-    authorizedUser,
   } = props;
 
+  const { user: authorizedUser } = useContext(AuthorizationContext);
   const canNotRateUp = !!(ratedUsers || [])
     .find(ratedUser => ratedUser.action && ratedUser.user.id === authorizedUser.id);
   const canNotRateDown = !!(ratedUsers || [])
@@ -49,9 +49,8 @@ export const RatePanelComponent = (props) => {
 RatePanelComponent.propTypes = {
   classes: PropTypes.object,
   ratedUsers: PropTypes.array,
-  authorizedUser: PropTypes.object,
   rate: PropTypes.number,
   onRate: PropTypes.func,
 };
 
-export default withAuthorization(withStyles(RatePanelComponentStyles)(RatePanelComponent));
+export default withStyles(RatePanelComponentStyles)(RatePanelComponent);

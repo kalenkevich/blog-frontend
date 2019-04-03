@@ -4,18 +4,18 @@ import withStyles from 'react-jss';
 import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../common/button';
-import withAuthorization from '../../hocs/withAuthorization';
 import HeaderComponentStyle from './HeaderComponentStyle';
 import MobileContext from '../../context/MobileContext';
+import AuthorizationContext from '../../context/AuthorizationContext';
 
 const HeaderComponent = (props) => {
   const {
     classes,
     history,
-    authorizedUser,
     signOut,
   } = props;
   const { isMobile } = useContext(MobileContext);
+  const { user: authorizedUser } = useContext(AuthorizationContext);
   const currentLocation = history.location.pathname;
   const canShowSignUpPanel = !['/sign-in', '/sign-up'].includes(currentLocation);
 
@@ -66,8 +66,7 @@ const HeaderComponent = (props) => {
 HeaderComponent.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object,
-  authorizedUser: PropTypes.object,
   signOut: PropTypes.func,
 };
 
-export default withAuthorization(withRouter(withStyles(HeaderComponentStyle)(HeaderComponent)));
+export default withRouter(withStyles(HeaderComponentStyle)(HeaderComponent));

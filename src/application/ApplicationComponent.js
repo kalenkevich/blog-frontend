@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import Header from '../components/header';
 import { SettingsProvider } from '../context/SettingsContext';
-import { Authorization } from '../context/AutorizationContext';
+import { Authorization } from '../context/AuthorizationContext';
 import { MobileApp } from '../context/MobileContext';
 import settings from '../../config/settings';
 import ApplicationStyles from './ApplicationStyle';

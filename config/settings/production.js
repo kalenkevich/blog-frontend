@@ -1,8 +1,3 @@
 export default {
-  Backend: {
-    Url: '',
-  },
-  App: {
-    Name: 'Production',
-  },
+  BackendUrl: 'https://blog-backend-production.herokuapp.com',
 };

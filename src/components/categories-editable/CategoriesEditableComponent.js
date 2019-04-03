@@ -35,8 +35,8 @@ const CategoriesEditableComponent = (props) => {
   const onValueChange = async (value) => {
     setCurrentInputValue(value);
 
-    if (currentInputValue) {
-      const foundedCategories = await CategoriesService.searchCategories(currentInputValue);
+    if (value) {
+      const foundedCategories = await CategoriesService.searchCategories(value);
 
       setFetchedCategories(foundedCategories);
     }
@@ -62,8 +62,8 @@ const CategoriesEditableComponent = (props) => {
       <Autocomplete
         className={classes.autocomplete}
         value={currentInputValue}
-        onValueChange={onValueChange}
         options={options}
+        onChange={onValueChange}
         onEnter={onAddNewCategory}
         onSelect={onSelectCategory}
       />

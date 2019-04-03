@@ -5,7 +5,7 @@ import settings from '../../config/settings';
 import NotificationService from './NotificationService';
 
 const defaultClientConfig = {
-  uri: `${settings.Backend.Url}/graphql`,
+  uri: `${settings.BackendUrl}/graphql`,
   cache: new InMemoryCache({
     addTypename: true,
   }),

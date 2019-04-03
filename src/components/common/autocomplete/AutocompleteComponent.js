@@ -21,14 +21,20 @@ export const AutocompleteStyles = theme => ({
     border: theme.border,
     borderRadius: theme.borderRadius,
     backgroundColor: '#FFFFFF',
+    overflow: 'scroll',
   },
   option: {
-    height: '30px',
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: '3px 10px',
+    padding: '10px',
     cursor: 'pointer',
+    borderTop: theme.border,
+    '': {
+      '&:first-of-type': {
+        borderTop: 'none',
+      },
+    },
     '&:hover': {
       backgroundColor: theme.brandPrimaryColor,
     },
@@ -41,7 +47,7 @@ const Autocomplete = (props) => {
     classes,
     options,
     value,
-    onValueChange,
+    onChange,
     onEnter,
     onSelect,
   } = props;
@@ -51,7 +57,7 @@ const Autocomplete = (props) => {
       <Input
         className={classes.input}
         value={value}
-        onChange={e => onValueChange(e.target.value)}
+        onChange={e => onChange(e.target.value)}
         onEnter={() => onEnter(value)}
       />
       { options.length ? <div className={classes.options}>
@@ -76,7 +82,7 @@ Autocomplete.propTypes = {
   value: PropTypes.string,
   onEnter: PropTypes.func,
   onSelect: PropTypes.func,
-  onValueChange: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 export default withStyles(AutocompleteStyles)(Autocomplete);

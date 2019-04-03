@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
@@ -7,11 +7,12 @@ import UserProfile from '../../components/user-profile';
 import UserProfilePageStyle from './UserProfilePageStyle';
 import UserProfilePageService from './UserProfilePageService';
 import PostService from '../../services/PostService';
-import withAuthorization from '../../hocs/withAuthorization';
+import AuthorizationContext from '../../context/AuthorizationContext';
 
 const UserProfilePage = (props) => {
-  const { classes, match, authorizedUser } = props;
+  const { classes, match } = props;
   const { userId } = match.params;
+  const { user: authorizedUser } = useContext(AuthorizationContext);
   const {
     user,
     isLoading,
@@ -83,8 +84,7 @@ export const getForUser = (id, authorizedUser) => {
 
 UserProfilePage.propTypes = {
   classes: PropTypes.object.isRequired,
-  authorizedUser: PropTypes.object,
   match: PropTypes.object,
 };
 
-export default withAuthorization(withRouter(withStyles(UserProfilePageStyle)(UserProfilePage)));
+export default withRouter(withStyles(UserProfilePageStyle)(UserProfilePage));

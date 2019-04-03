@@ -9,18 +9,18 @@ import EditableLabel from '../common/editable-label';
 import EditableCategories from '../categories-editable';
 import PostFormStyles from './PostFormComponentStyle';
 import MobileContext from '../../context/MobileContext';
-import withAuthorization from '../../hocs/withAuthorization';
+import AuthorizationContext from '../../context/AuthorizationContext';
 
 export const PostForm = (props) => {
   const {
     post,
     classes,
     className,
-    authorizedUser,
     onSave,
     onCancel,
   } = props;
   const { isMobile } = useContext(MobileContext);
+  const { user: authorizedUser } = useContext(AuthorizationContext);
   const [title, setTitle] = useState(post ? post.title : '');
   const [content, setContent] = useState(post ? post.content : '');
   const [categories, setCategories] = useState(post ? post.categories : []);
@@ -70,7 +70,7 @@ export const PostForm = (props) => {
         </div>
       </div>
       <EditableCategories
-        className={`${classes.formField} ${classes.categories}`}
+        className={`${classes.categories}`}
         categories={categories}
         onChange={setCategories}
       />
@@ -94,9 +94,8 @@ PostForm.propTypes = {
   post: PropTypes.object,
   classes: PropTypes.object,
   className: PropTypes.string,
-  authorizedUser: PropTypes.object,
   onSave: PropTypes.func,
   onCancel: PropTypes.func,
 };
 
-export default withAuthorization(withStyles(PostFormStyles)(PostForm));
+export default withStyles(PostFormStyles)(PostForm);

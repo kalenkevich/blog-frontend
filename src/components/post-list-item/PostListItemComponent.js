@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Categories from '../categories';
 import PostListItemComponentStyle from './PostListItemComponentStyle';
 import { getFormattedDate } from '../../services/Formatter';
-import withAuthorization from '../../hocs/withAuthorization';
 import MobileContext from '../../context/MobileContext';
+import AuthorizationContext from '../../context/AuthorizationContext';
 import RatePanel from '../rate-panel';
 import AuthorPanel from '../author-panel';
 import ContentPreview from '../common/editable-text/ContentPreview';
@@ -17,10 +17,10 @@ const PostListItem = (props) => {
     classes,
     post,
     onClick = () => {},
-    authorizedUser,
     onRate,
   } = props;
   const { isMobile } = useContext(MobileContext);
+  const { user: authorizedUser } = useContext(AuthorizationContext);
 
   return (
     <>
@@ -55,10 +55,9 @@ const PostListItem = (props) => {
 PostListItem.propTypes = {
   classes: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
-  authorizedUser: PropTypes.object,
   onClick: PropTypes.func,
   onScrolledToEnd: PropTypes.func,
   onRate: PropTypes.func,
 };
 
-export default withAuthorization(withStyles(PostListItemComponentStyle)(PostListItem));
+export default withStyles(PostListItemComponentStyle)(PostListItem);

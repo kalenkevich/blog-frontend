@@ -6,21 +6,21 @@ import Button from '../common/button';
 import TextArea from '../common/text-area';
 import { getFormattedDate } from '../../services/Formatter';
 import CommentComponentStyle from './CommentComponentStyle';
-import withAuthorization from '../../hocs/withAuthorization';
 import RatePanel from '../rate-panel';
 import AuthorPanel from '../author-panel';
 import MobileContext from '../../context/MobileContext';
+import AuthorizationContext from '../../context/AuthorizationContext';
 
 const CommentListItemComponent = (props) => {
   const {
     classes,
     comment,
     onClick = () => {},
-    authorizedUser,
     onDelete,
     onRate,
     onUpdate,
   } = props;
+  const { user: authorizedUser } = useContext(AuthorizationContext);
   const { isMobile } = useContext(MobileContext);
   const [commentContent, setCommentContent] = useState(comment.content);
   const [isEditState, setEditState] = useState(false);
@@ -124,10 +124,9 @@ CommentListItemComponent.propTypes = {
   className: PropTypes.string,
   comment: PropTypes.object,
   onClick: PropTypes.func,
-  authorizedUser: PropTypes.object,
   onUpdate: PropTypes.func,
   onDelete: PropTypes.func,
   onRate: PropTypes.func,
 };
 
-export default withAuthorization(withStyles(CommentComponentStyle)(CommentListItemComponent));
+export default withStyles(CommentComponentStyle)(CommentListItemComponent);

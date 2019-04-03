@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
@@ -6,10 +6,11 @@ import Input from '../../components/common/input';
 import Button from '../../components/common/button';
 import Label from '../../components/common/label';
 import SignInPageStyle from './SignInPageStyle';
-import withAuthorization from '../../hocs/withAuthorization';
+import AuthorizationContext from '../../context/AuthorizationContext';
 
 const SignInPage = (props) => {
-  const { classes, history, signIn } = props;
+  const { classes, history } = props;
+  const { signIn } = useContext(AuthorizationContext);
   const forErrorLabel = getForErrorLabel();
   const forEmailInput = getForInput({ placeholder: 'Email' });
   const forPasswordInput = getForInput({ placeholder: 'Password', type: 'password' });
@@ -68,7 +69,6 @@ export const getForErrorLabel = () => {
 SignInPage.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object,
-  signIn: PropTypes.func,
 };
 
-export default withAuthorization(withRouter(withStyles(SignInPageStyle)(SignInPage)));
+export default withRouter(withStyles(SignInPageStyle)(SignInPage));

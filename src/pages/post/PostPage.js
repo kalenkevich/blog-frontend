@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
 import Post from '../../components/post';
 import PostService from '../../services/PostService';
 import PostPageStyle from './PostPageStyle';
-import withAuthorization from '../../hocs/withAuthorization';
+import AuthorizationContext from '../../context/AuthorizationContext';
 
 const PostPage = (props) => {
   const {
     classes,
     match,
     history,
-    authorizedUser,
   } = props;
   const { postId } = match.params;
+  const { user: authorizedUser } = useContext(AuthorizationContext);
   const forPost = getForPost(postId, history, authorizedUser);
 
   return (
@@ -152,4 +152,4 @@ PostPage.propTypes = {
   match: PropTypes.object,
 };
 
-export default withAuthorization(withRouter(withStyles(PostPageStyle)(PostPage)));
+export default withRouter(withStyles(PostPageStyle)(PostPage));

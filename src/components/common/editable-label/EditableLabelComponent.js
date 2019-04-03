@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import Input from '../input';
@@ -13,15 +13,18 @@ const EditableLabelComponent = (props) => {
     placeholder,
   } = props;
   const [isEdit, setEditState] = useState(false);
-  const [currentValue, setCurrentValue] = useState(value);
+  const [currentValue, setCurrentValue] = useState('');
   const onCloseEditState = () => {
     setEditState(false);
 
     if (currentValue) {
       onChange(currentValue);
-      setCurrentValue('');
     }
   };
+
+  useEffect(() => {
+    setCurrentValue(value);
+  }, [value]);
 
   if (!isEdit) {
     return (
@@ -35,7 +38,7 @@ const EditableLabelComponent = (props) => {
 
   return <Input
     className={`${classes.input} ${className}`}
-    value={currentValue || value}
+    value={currentValue}
     onChange={e => setCurrentValue(e.target.value)}
     onBlur={onCloseEditState}
     placeholder={placeholder}

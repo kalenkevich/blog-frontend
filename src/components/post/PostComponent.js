@@ -11,9 +11,9 @@ import Categories from '../categories';
 import AuthorPanel from '../author-panel';
 import CommentList from '../comment-list';
 import CommentCreate from '../comment-create';
-import withAuthorization from '../../hocs/withAuthorization';
 import RatePanel from '../rate-panel';
 import MobileContext from '../../context/MobileContext';
+import AuthorizationContext from '../../context/AuthorizationContext';
 import ContentPreview from '../common/editable-text/ContentPreview';
 import { getFormattedDate } from '../../services/Formatter';
 
@@ -21,7 +21,6 @@ const PostComponent = (props) => {
   const {
     classes,
     post,
-    authorizedUser,
     onUpdate,
     onDelete,
     onAddComment,
@@ -36,6 +35,7 @@ const PostComponent = (props) => {
   }
 
   const { isMobile } = useContext(MobileContext);
+  const { user: authorizedUser } = useContext(AuthorizationContext);
   const [isEditState, setEditState] = useState(false);
   const onEditClick = () => setEditState(true);
   const onCancelClick = () => setEditState(false);
@@ -99,7 +99,6 @@ const PostComponent = (props) => {
 PostComponent.propTypes = {
   classes: PropTypes.object,
   post: PropTypes.object,
-  authorizedUser: PropTypes.object,
   onUpdate: PropTypes.func,
   onDelete: PropTypes.func,
   onAddComment: PropTypes.func,
@@ -111,4 +110,4 @@ PostComponent.propTypes = {
 
 export const StyledPostComponent = withStyle(PostComponentStyle)(PostComponent);
 
-export default withAuthorization(withLoading(PostComponentLoading)(StyledPostComponent));
+export default withLoading(PostComponentLoading)(StyledPostComponent);

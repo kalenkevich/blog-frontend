@@ -22,7 +22,7 @@ export default (theme) => {
       height: '42px',
     },
     categories: {
-      marginTop: '10px',
+      margin: '10px 0',
     },
     authorPanel: {
       display: 'flex',
