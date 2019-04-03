@@ -37,9 +37,9 @@ const UserProfilePage = (props) => {
   );
 };
 
-export const getForUser = (id, authorizedUser) => {
+export const getForUser = (id) => {
   const [user, setUser] = useState({});
-  const [userPosts, setUserPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState(null);
   const [isLoading, setLoadingState] = useState(false);
   const fetchUserAndPosts = async (userId) => {
     setLoadingState(true);

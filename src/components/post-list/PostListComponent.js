@@ -14,9 +14,10 @@ const PostList = (props) => {
     className,
     onScrolledToEnd = () => {},
     onRate,
+    isLoading,
   } = props;
 
-  if (posts.length === 0) {
+  if (!isLoading && posts && posts.length === 0) {
     return (
       <div className={classes.emptyPlaceholder}>No any posts :(</div>
     );
@@ -38,6 +39,7 @@ const PostList = (props) => {
 PostList.propTypes = {
   classes: PropTypes.object.isRequired,
   className: PropTypes.string,
+  isLoading: PropTypes.bool,
   posts: PropTypes.array.isRequired,
   onPostClick: PropTypes.func,
   onScrolledToEnd: PropTypes.func,

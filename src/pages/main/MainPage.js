@@ -36,7 +36,7 @@ const MainPage = (props) => {
 };
 
 export const forPosts = (history) => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
   const [page, setPage] = useState(0);
   const [isLoading, setLoadingState] = useState(false);
   const [searchQuery, setSearchQuery] = useState(new URLSearchParams(history.location.search).get('query'));
