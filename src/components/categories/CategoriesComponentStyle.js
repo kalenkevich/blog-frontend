@@ -9,6 +9,7 @@ export default theme => ({
     borderRadius: theme.borderRadius,
     transition: 'background-color linear 100ms',
     marginRight: '5px',
+    marginBottom: '5px',
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: theme.brandPrimaryColor,

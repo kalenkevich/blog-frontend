@@ -12,10 +12,9 @@ const HeaderComponent = (props) => {
   const {
     classes,
     history,
-    signOut,
   } = props;
   const { isMobile } = useContext(MobileContext);
-  const { user: authorizedUser } = useContext(AuthorizationContext);
+  const { user: authorizedUser, signOut } = useContext(AuthorizationContext);
   const currentLocation = history.location.pathname;
   const canShowSignUpPanel = !['/sign-in', '/sign-up'].includes(currentLocation);
 

@@ -8,8 +8,7 @@ export default (theme) => {
       ...tagListComponentStyle.root,
       alignItems: 'center',
       border: theme.border,
-      height: '45px',
-      paddingLeft: '5px',
+      padding: '5px',
     },
     autocomplete: {
       '& > input': {
