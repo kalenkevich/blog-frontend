@@ -1,5 +1,5 @@
 {
-  "name": "Kalenkevich_Blog_Frontend",
+  "name": "blog-frontend",
   "version": "1.0.0",
   "description": "",
   "main": "src/server/index.js",
