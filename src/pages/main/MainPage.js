@@ -2,9 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { withRouter } from 'react-router-dom';
+import { Button, Input } from '@zenvo/core-ui';
 import Posts from '../../components/post-list';
-import Input from '../../components/common/input';
-import Button from '../../components/common/button';
 import PostService from '../../services/PostService';
 import MainPageStyle from './MainPageStyle';
 

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '../common/button';
+import { Button } from '@zenvo/core-ui';
 import RatePanelComponentStyles from './RatePanelComponentStyle';
 import AuthorizationContext from '../../context/AuthorizationContext';
 
@@ -21,9 +21,9 @@ export const RatePanelComponent = (props) => {
 
   const { user: authorizedUser } = useContext(AuthorizationContext);
   const canNotRateUp = !!(ratedUsers || [])
-    .find(ratedUser => ratedUser.action && ratedUser.user.id === authorizedUser.id);
+    .find(ratedUser => ratedUser.action && ratedUser.userId == authorizedUser.id);
   const canNotRateDown = !!(ratedUsers || [])
-    .find(ratedUser => !ratedUser.action && ratedUser.user.id === authorizedUser.id);
+    .find(ratedUser => !ratedUser.action && ratedUser.userId == authorizedUser.id);
 
   return (
     <div className={classes.rateWrapper}>

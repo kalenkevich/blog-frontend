@@ -2,19 +2,18 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyle from 'react-jss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, MobileContext } from '@zenvo/core-ui';
 import withLoading from '../../hocs/withLoading';
 import PostComponentLoading from './PostComponentLoading';
 import PostComponentStyle from './PostComponentStyle';
 import PostForm from '../post-form';
-import Button from '../common/button';
 import Categories from '../categories';
 import AuthorPanel from '../author-panel';
 import CommentList from '../comment-list';
 import CommentCreate from '../comment-create';
 import RatePanel from '../rate-panel';
-import MobileContext from '../../context/MobileContext';
 import AuthorizationContext from '../../context/AuthorizationContext';
-import ContentPreview from '../common/editable-text/ContentPreview';
+import ContentPreview from '../editable-text/ContentPreview';
 import { getFormattedDate } from '../../services/Formatter';
 
 const PostComponent = (props) => {

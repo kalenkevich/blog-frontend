@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import withLoading from '../../hocs/withLoading';
-import InfinityScroll from '../common/infinity-scroll';
+import InfinityScroll from '../infinity-scroll';
 import PostListItem from '../post-list-item';
 import PostListLoading from './PostListComponentLoading';
 import PostListComponentStyle from './PostListComponentStyle';

@@ -2,13 +2,11 @@ import React, { useState, Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '../common/button';
-import TextArea from '../common/text-area';
+import { Button, TextArea, MobileContext } from '@zenvo/core-ui';
 import { getFormattedDate } from '../../services/Formatter';
 import CommentComponentStyle from './CommentComponentStyle';
 import RatePanel from '../rate-panel';
 import AuthorPanel from '../author-panel';
-import MobileContext from '../../context/MobileContext';
 import AuthorizationContext from '../../context/AuthorizationContext';
 
 const CommentListItemComponent = (props) => {

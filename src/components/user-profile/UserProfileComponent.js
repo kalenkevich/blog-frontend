@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
+import { Icon } from '@zenvo/core-ui';
 import withLoading from '../../hocs/withLoading';
-import Icon from '../common/icon';
 import UserProfileComponentStyle from './UserProfileComponentStyle';
 import UserProfileComponentLoading from './UserProfileComponentLoading';
 

@@ -2,10 +2,8 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TextArea from '../common/text-area';
-import Button from '../common/button';
+import { Button, TextArea, MobileContext } from '@zenvo/core-ui';
 import CommentCreateComponentStyle from './CommentCreateComponentStyle';
-import MobileContext from '../../context/MobileContext';
 
 const CommentCreateComponent = (props) => {
   const { classes, onAdd, className } = props;

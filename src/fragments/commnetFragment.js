@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import UserFragment from './userFragment';
+import { UserFragment } from '@zenvo/core-ui';
 
 export default gql`
   fragment CommentFragment on Comment {
@@ -11,9 +11,7 @@ export default gql`
       ...UserFragment
     }
     ratedUsers {
-      user {
-        id
-      }
+      userId
       action
     }
   }

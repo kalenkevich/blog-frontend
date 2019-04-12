@@ -4,13 +4,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { loadableReady } from '@loadable/component';
 import { renderRoutes } from 'react-router-config';
 import { ThemeProvider } from 'react-jss';
+import { Theme } from '@zenvo/core-ui';
 import routes from './routes';
 import Application from './application/ApplicationComponent';
-import theme from './theme';
 
 loadableReady(() => ReactDOM.hydrate(
   <BrowserRouter>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={Theme}>
       <Application>
         {renderRoutes(routes)}
       </Application>

@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AutocompleteComponent, Label } from '@zenvo/core-ui';
 import CategoriesService from '../../services/CategoryService';
 import CategoriesComponentStyle from './CategoriesComponentStyle';
-import Label from '../common/label';
-import Autocomplete from '../common/autocomplete';
 
 const CategoriesEditableComponent = (props) => {
   const {
@@ -59,7 +58,7 @@ const CategoriesEditableComponent = (props) => {
           </span>
         </div>
       ))}
-      <Autocomplete
+      <AutocompleteComponent
         className={classes.autocomplete}
         value={currentInputValue}
         options={options}

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import UserFragment from './userFragment';
+import { UserFragment } from '@zenvo/core-ui';
 import CategoryFragment from './categoryFragment';
 import CommentFragment from './commnetFragment';
 
@@ -13,9 +13,7 @@ export default gql`
     }
     rate
     ratedUsers {
-      user {
-        id
-      }
+      userId
       action
     }
     categories {
@@ -41,9 +39,7 @@ export const PostPreviewFragment = gql`
     }
     rate
     ratedUsers {
-      user {
-        id
-      }
+      userId
       action
     }
     categories {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import withStyles from 'react-jss';
-import Icon from '../common/icon';
+import { Icon } from '@zenvo/core-ui';
 import AuthorPanelStyle from './AuthorPanelStyle';
 
 const AuthorPanel = ({ classes, className, author }) => (

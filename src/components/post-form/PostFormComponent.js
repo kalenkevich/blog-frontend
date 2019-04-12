@@ -2,13 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '../common/button';
+import { Button, MobileContext } from '@zenvo/core-ui';
 import AuthorPanel from '../author-panel';
-import EditableText from '../common/editable-text';
-import EditableLabel from '../common/editable-label';
+import EditableText from '../editable-text';
+import EditableLabel from '../editable-label';
 import EditableCategories from '../categories-editable';
 import PostFormStyles from './PostFormComponentStyle';
-import MobileContext from '../../context/MobileContext';
 import AuthorizationContext from '../../context/AuthorizationContext';
 
 export const PostForm = (props) => {

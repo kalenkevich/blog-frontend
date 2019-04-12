@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import Input from '../input';
+import { Input } from '@zenvo/core-ui';
 import EditableLabelComponentStyles from './EditableLabelComponentStyle';
 
 const EditableLabelComponent = (props) => {

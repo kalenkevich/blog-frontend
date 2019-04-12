@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MobileContext } from '@zenvo/core-ui';
 import Categories from '../categories';
 import PostListItemComponentStyle from './PostListItemComponentStyle';
 import { getFormattedDate } from '../../services/Formatter';
-import MobileContext from '../../context/MobileContext';
 import AuthorizationContext from '../../context/AuthorizationContext';
 import RatePanel from '../rate-panel';
 import AuthorPanel from '../author-panel';
-import ContentPreview from '../common/editable-text/ContentPreview';
+import ContentPreview from '../editable-text/ContentPreview';
 
 const PostListItem = (props) => {
   const {
