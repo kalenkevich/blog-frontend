@@ -15,9 +15,22 @@ const HeaderComponent = (props) => {
   } = props;
   const { isMobile } = useContext(MobileContext);
   const settings = useContext(SettingsContext);
-  const { user: authorizedUser, signOut } = useContext(AuthorizationContext);
-  const currentLocation = history.location.pathname;
-  const canShowSignUpPanel = !['/sign-in', '/sign-up'].includes(currentLocation);
+  const { user: authorizedUser } = useContext(AuthorizationContext);
+  const goToSignUp = () => {
+    const safeUrl = encodeURIComponent(window.location.href);
+
+    window.location.href = `${settings.AuthFrontendUrl}/sign-up?returnUrl=${safeUrl}`;
+  };
+  const goToSignIn = () => {
+    const safeUrl = encodeURIComponent(window.location.href);
+
+    window.location.href = `${settings.AuthFrontendUrl}/sign-in?returnUrl=${safeUrl}`;
+  };
+  const goToSignOut = () => {
+    const safeUrl = encodeURIComponent(window.location.href);
+
+    window.location.href = `${settings.AuthFrontendUrl}/sign-out?returnUrl=${safeUrl}`;
+  };
 
   let ResultPanel = null;
   if (authorizedUser) {
@@ -33,21 +46,21 @@ const HeaderComponent = (props) => {
         >
           { isMobile ? <FontAwesomeIcon icon='plus'/> : 'Create new Post' }
         </Button>
-        <Button className={classes.actionPanelButton} onClick={signOut}>
+        <Button className={classes.actionPanelButton} onClick={goToSignOut}>
           { isMobile ? <FontAwesomeIcon icon='sign-out-alt'/> : 'Sign Out' }
         </Button>
       </div>
     );
-  } else if (canShowSignUpPanel) {
+  } else {
     ResultPanel = (
       <div className={classes.actionPanel}>
         <Button className={classes.actionPanelButton}
-          onClick={() => history.push('/sign-in')}
+          onClick={goToSignIn}
         >
           Sign In
         </Button>
         <Button className={classes.actionPanelButton}
-          onClick={() => history.push('/sign-up')}
+          onClick={goToSignUp}
         >
           Sign Up
         </Button>

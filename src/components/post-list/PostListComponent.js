@@ -40,7 +40,7 @@ PostList.propTypes = {
   classes: PropTypes.object.isRequired,
   className: PropTypes.string,
   isLoading: PropTypes.bool,
-  posts: PropTypes.array.isRequired,
+  posts: PropTypes.array,
   onPostClick: PropTypes.func,
   onScrolledToEnd: PropTypes.func,
   onRate: PropTypes.func,
