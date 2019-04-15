@@ -1,3 +1,3 @@
 export default {
-  AppName: 'Blog',
+  AppName: 'Blog'
 };
