@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'react-jss';
-import {
-  SettingsProvider,
-  MobileApp,
-} from '@zenvo/core-ui';
+import { MobileApp } from '@zenvo/core-ui';
+import { SettingsProvider } from '../context/SettingsContext';
 import Header from '../components/header';
 import { Authorization } from '../context/AuthorizationContext';
 import settings from '../../config/settings';
